@@ -1,14 +1,21 @@
-import { SfInput, SfButton } from '@storefront-ui/react';
+import { SfInput, SfButton, } from '@storefront-ui/react';
 import { useFormik } from 'formik';
 import { useFrappeAuth } from 'frappe-react-sdk';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getTokenFromLocalStorage } from '../utils';
 
 export default function Login() {
     const navigate = useNavigate();
     const {
         isLoading,
-        updateCurrentUser,
     } = useFrappeAuth();
+
+    useEffect(() => {
+        if (getTokenFromLocalStorage()) {
+            navigate("/");
+        }
+    }, [])
 
     const formik = useFormik({
         initialValues: {
@@ -26,11 +33,8 @@ export default function Login() {
             }),
         })
             .then((response) => response.json())
-            .then((data) => {
-                localStorage.setItem("token", data.message.token);
-                updateCurrentUser();
-                navigate('/');
-            })
+            .then((data) => localStorage.setItem("token", data.message.token))
+            .then(() => navigate("/"))
     });
 
 
