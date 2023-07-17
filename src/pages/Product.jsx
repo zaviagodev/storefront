@@ -1,10 +1,6 @@
-import { useRef, useState } from 'react';
-import { useIntersection } from 'react-use';
+import { useState } from 'react';
 import {
     SfScrollable,
-    SfIconCircle,
-    SfIconChevronLeft,
-    SfIconChevronRight,
 } from '@storefront-ui/react';
 import { useCounter } from 'react-use';
 import { useId, ChangeEvent } from 'react';
@@ -15,8 +11,6 @@ import {
     SfLink,
     SfCounter,
     SfIconShoppingCart,
-    SfIconCompareArrows,
-    SfIconFavorite,
     SfIconSell,
     SfIconPackage,
     SfIconRemove,
@@ -26,31 +20,17 @@ import {
     SfIconShoppingCartCheckout,
 } from '@storefront-ui/react';
 import { useParams } from 'react-router-dom';
-import { useFrappeGetDoc } from 'frappe-react-sdk';
-import ProgressiveImage from 'react-progressive-graceful-image';
-
-
-const withBase = (filepath) => `https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/gallery/${filepath}`;
-
-const images = [
-    { imageSrc: withBase('gallery_1.png'), imageThumbSrc: withBase('gallery_1_thumb.png'), alt: 'backpack1' },
-    { imageSrc: withBase('gallery_2.png'), imageThumbSrc: withBase('gallery_2_thumb.png'), alt: 'backpack2' },
-];
-
+import { useProducts } from '../hooks/useProducts';
+import { useFrappeAuth } from 'frappe-react-sdk';
 
 const Product = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
     const { id } = useParams();
+    const { get } = useProducts();
+    const product = get(id);
     const inputId = "useId('input')";
     const min = 1;
     const max = 999;
     const [value, { inc, dec, set }] = useCounter(min);
-
-    const { data: product, error, isValidating, mutate } = useFrappeGetDoc('Website Item', id, {
-        fields: ['name', 'thumbnail', "slideshow", "website_image", "item_code", "description", "price", "rating", "reviews", "stock_uom", "stock_qty", "brand", "item_group", "item_name"],
-    });
-
-
 
     function handleOnChange(event) {
         const { value: currentValue } = event.target;
@@ -59,46 +39,29 @@ const Product = () => {
     }
 
 
-    const onDragged = (event) => {
-        if (event.swipeRight && activeIndex > 0) {
-            setActiveIndex((currentActiveIndex) => currentActiveIndex - 1);
-        } else if (event.swipeLeft && activeIndex < images.length - 1) {
-            setActiveIndex((currentActiveIndex) => currentActiveIndex + 1);
-        }
-    };
     return (
         <main className="mx-auto p-4">
             <div className="relative flex w-full max-h-[600px] aspect-[4/3] ">
                 <SfScrollable
                     className="relative w-full h-full snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-                    activeIndex={activeIndex}
                     direction="vertical"
                     wrapperClassName="h-full"
                     buttonsPlacement="none"
-                    isActiveIndexCentered
                     drag={{ containerWidth: true }}
-                    onDragEnd={onDragged}
                 >
                     <div className="absolute inline-flex items-center justify-center text-sm font-medium text-white bg-secondary-600 py-1.5 px-3 mb-4">
                         <SfIconSell size="sm" className="mr-1.5" />
                         Sale
                     </div>
-                    {([product?.thumbnail] ?? []).map((imagePath, index) => (
-                        <div key={`${imagePath}-${index}`} className="flex justify-center h-full basis-full shrink-0 grow snap-center">
-                            <ProgressiveImage src={`https://umer2002.aca.fc.zaviago.com/${imagePath}`} placeholder={"http://localhost:5173/vite.svg"}>
-                                {(src, loading) => (
-                                    <img
-                                        aria-label={src}
-                                        className={`object-contain w-auto h-full ${loading ? "loading" : "loaded"}`}
-                                        alt={src}
-                                        src={src}
-                                    />
-                                )}
-                            </ProgressiveImage>
-                        </div>
-                    ))}
+                    <div className="flex justify-center h-full basis-full shrink-0 grow snap-center">
+                        <img
+                            src={`https://umer2002.aca.fc.zaviago.com${product?.thumbnail}`}
+                            className="object-contain w-auto h-full"
+                            aria-label={product?.thumbnail}
+                            alt={product?.thumbnail}
+                        />
+                    </div>
                 </SfScrollable>
-
             </div>
             <section className="md:max-w-[640px] mt-4 md:mt-6">
                 <h1 className="mb-1 font-bold typography-headline-4">

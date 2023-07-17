@@ -6,10 +6,9 @@ import Home from "./pages/Home";
 import Product from "./pages/Product";
 import './App.css'
 import { useEffect } from "react";
+import { ProductsProvider } from "./hooks/useProducts";
+import { getTokenFromLocalStorage } from "./utils";
 
-const getTokenFromLocalStorage = () => {
-  return localStorage.getItem("token");
-};
 
 function App() {
   const navigate = useNavigate();
@@ -21,18 +20,21 @@ function App() {
 
   return (
     <FrappeProvider url={"https://umer2002.aca.fc.zaviago.com"}
+      enableSocket={false}
       tokenParams={{
         type: "token",
         useToken: true,
         token: getTokenFromLocalStorage,
       }}
     >
-      <NavHeader />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="products/:id" element={<Product />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <ProductsProvider>
+        <NavHeader />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="products/:id" element={<Product />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </ProductsProvider>
     </FrappeProvider>
   )
 }

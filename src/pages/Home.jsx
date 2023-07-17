@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import ProductCard from '../components/ProductCard'
-import { SfScrollable } from '@storefront-ui/react'
-import { useFrappeGetDocList } from 'frappe-react-sdk'
+import { useProducts } from '../hooks/useProducts'
+import { useFrappeAuth } from 'frappe-react-sdk';
 
 const Home = () => {
-    const { data: products } = useFrappeGetDocList('Website Item', {
-        fields: ['name', 'thumbnail', "website_image", "item_code"],
-    });
+    const { updateCurrentUser } = useFrappeAuth();
+    const { products } = useProducts()
+
+    useEffect(() => {
+        updateCurrentUser()
+    }, [updateCurrentUser])
 
     return (
         <>
