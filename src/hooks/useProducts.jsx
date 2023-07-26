@@ -1,67 +1,24 @@
 import React, { createContext, useContext, useState } from 'react'
-import { useFrappeGetDoc, useFrappeGetDocList } from 'frappe-react-sdk';
+import { useFrappeGetCall } from 'frappe-react-sdk';
 
 const ProductsContext = createContext([])
 
 export const ProductsProvider = ({ children }) => {
     const [products, setProducts] = useState([])
-    const [update, setUpdate] = useState(null)
     const [newP, setNewP] = useState(null)
 
-    // fetch all products on mount
-    useFrappeGetDocList('Website Item', {
-        fields: ['name', 'thumbnail', "website_image", "item_code"],
-    }, "products",
-        {
-            isOnline: () => products.length === 0,
-            onSuccess: (data) => setProducts(data)
-        });
-
-    // refetch the product that needs to be updated
-    useFrappeGetDoc(
-        'Website Item',
-        products[update]?.name,
-        products[update]?.name === undefined ? null : products[update]?.name,
-        {
-            onSuccess: (product) => {
-                setProducts((prev) => {
-                    prev[update] = product
-                    return [...prev]
-                })
-                setUpdate(null)
-            },
-
-        }
-    )
-
-    // fetch the new product
-    useFrappeGetDoc(
-        'Website Item',
-        newP,
-        newP === undefined ? null : newP,
-        {
-            onSuccess: (product) => {
-                const merged = [...products]
-                var idx = merged.findIndex((p) => p.name === newP)
-                if (idx === -1) {
-                    merged.push(product)
-                    setProducts(merged)
-                } else {
-                    merged[idx] = product
-                    setProducts(merged)
-                }
-                setNewP(null)
-            },
-        }
-    )
+    useFrappeGetCall('erpnext.e_commerce.api.get_product_filter_data', {
+        name: newP,
+        query_args: { "field_filters": {}, "attribute_filters": {}, "item_group": null, "start": null, "from_filters": false }
+    }, `products-${newP}`, {
+        isOnline: () => products.length === 0,
+        onSuccess: (data) => setProducts(data.message.items)
+    })
 
 
     const get = (name) => {
         // if product is already in the list, return it & refetch it in the background
-        const p = products.find((product, idx) => {
-            setUpdate(idx)
-            return product.name === name
-        })
+        const p = products.find((product) => product.name === name)
         // if product is not in the list, return null & fetch it in the background
         if (!p) {
             setNewP(name)
@@ -69,8 +26,15 @@ export const ProductsProvider = ({ children }) => {
         return p
     }
 
+    const getByItemCode = (itemCode) => {
+        // if product is already in the list, return it & refetch it in the background
+        const p = products.find((product) => product.item_code === itemCode)
+        return p
+    }
+
+
     return (
-        <ProductsContext.Provider value={{ products, setProducts, get }}>
+        <ProductsContext.Provider value={{ products, setProducts, get, getByItemCode }}>
             {children}
         </ProductsContext.Provider>
     )

@@ -1,4 +1,4 @@
-import { SfInput, SfButton, } from '@storefront-ui/react';
+import { SfInput, SfButton } from '@storefront-ui/react';
 import { useFormik } from 'formik';
 import { useFrappeAuth } from 'frappe-react-sdk';
 import { useEffect } from 'react';

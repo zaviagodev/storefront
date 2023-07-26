@@ -18,7 +18,7 @@ const Home = () => {
             </header>
             <main>
                 <div
-                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+                    className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto"
 
                 >
                     {(products ?? []).map((product) => (
@@ -26,8 +26,9 @@ const Home = () => {
                             key={product.item_code}
                             title={product.name}
                             productId={product.name}
-                            price={99}
-                            thumbnail={product.thumbnail ? `https://umer2002.aca.fc.zaviago.com${product.thumbnail}` : "https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/sneakers.png"} />
+                            itemCode={product.item_code}
+                            price={product.formatted_price}
+                            thumbnail={product.website_image ? product.website_image : "https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/sneakers.png"} />
 
                     ))}
                 </div>

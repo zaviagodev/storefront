@@ -7,7 +7,9 @@ import Product from "./pages/Product";
 import './App.css'
 import { useEffect } from "react";
 import { ProductsProvider } from "./hooks/useProducts";
+import { CartProvider } from "./hooks/useCart";
 import { getTokenFromLocalStorage } from "./utils";
+import Cart from "./components/Cart";
 
 
 function App() {
@@ -28,12 +30,15 @@ function App() {
       }}
     >
       <ProductsProvider>
-        <NavHeader />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="products/:id" element={<Product />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
+        <CartProvider>
+          <NavHeader />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="products/:id" element={<Product />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+          <Cart />
+        </CartProvider>
       </ProductsProvider>
     </FrappeProvider>
   )

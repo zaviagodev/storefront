@@ -9,10 +9,12 @@ import {
 } from '@storefront-ui/react';
 import viteLogo from '/vite.svg'
 import { useFrappeAuth } from 'frappe-react-sdk';
+import { useCart } from '../hooks/useCart';
 
 const NavHeader = () => {
     const [inputValue, setInputValue] = useState('');
-    const cartCount = localStorage.getItem('cartCount') ?? 0
+    const { cart, setIsOpen } = useCart()
+    const cartCount = Object.keys(cart).length ?? 0
     const { currentUser } = useFrappeAuth()
 
     const actionItems = [
@@ -79,6 +81,7 @@ const NavHeader = () => {
                                 variant="tertiary"
                                 square
                                 slotPrefix={actionItem.icon}
+                                onClick={() => setIsOpen(true)}
                             >
                                 {actionItem.ariaLabel === 'Cart' && (
                                     <SfBadge content={cartCount} />

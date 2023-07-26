@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { SfButton, SfRating, SfCounter, SfLink, SfIconShoppingCart, SfIconFavorite } from '@storefront-ui/react';
+import { useCart } from '../hooks/useCart';
 
 const ProductCard = ({
     title,
     thumbnail,
     price,
-    productId
+    productId,
+    itemCode,
 }) => {
+    const { addToCart } = useCart()
     return (
         <Link to={`/products/${productId}`}>
             <div className="border border-neutral-200 rounded-md hover:shadow-lg max-w-[300px]">
@@ -47,8 +50,11 @@ const ProductCard = ({
                     <p className="block py-2 font-normal typography-text-sm text-neutral-700">
                         Lightweight • Non slip • Flexible outsole • Easy to wear on and off
                     </p>
-                    <span className="block pb-2 font-bold typography-text-lg">${price}</span>
-                    <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />}>
+                    <span className="block pb-2 font-bold typography-text-lg">{price}</span>
+                    <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />} onClick={(e) => {
+                        e.preventDefault();
+                        addToCart(itemCode)
+                    }}>
                         Add to cart
                     </SfButton>
                 </div>

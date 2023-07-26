@@ -1,15 +1,11 @@
-import { useState } from 'react';
 import {
     SfScrollable,
 } from '@storefront-ui/react';
 import { useCounter } from 'react-use';
-import { useId, ChangeEvent } from 'react';
 import { clamp } from '@storefront-ui/shared';
 import {
-    SfRating,
     SfButton,
     SfLink,
-    SfCounter,
     SfIconShoppingCart,
     SfIconSell,
     SfIconPackage,
@@ -21,11 +17,12 @@ import {
 } from '@storefront-ui/react';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
-import { useFrappeAuth } from 'frappe-react-sdk';
+import { useCart } from '../hooks/useCart';
 
 const Product = () => {
     const { id } = useParams();
     const { get } = useProducts();
+    const { cart, addToCart } = useCart();
     const product = get(id);
     const inputId = "useId('input')";
     const min = 1;
@@ -55,10 +52,10 @@ const Product = () => {
                     </div>
                     <div className="flex justify-center h-full basis-full shrink-0 grow snap-center">
                         <img
-                            src={`https://umer2002.aca.fc.zaviago.com${product?.thumbnail}`}
+                            src={`${product?.website_image}`}
                             className="object-contain w-auto h-full"
-                            aria-label={product?.thumbnail}
-                            alt={product?.thumbnail}
+                            aria-label={product?.website_image}
+                            alt={product?.website_image}
                         />
                     </div>
                 </SfScrollable>
@@ -67,27 +64,16 @@ const Product = () => {
                 <h1 className="mb-1 font-bold typography-headline-4">
                     {product?.item_name}
                 </h1>
-                <strong className="block font-bold typography-headline-3">$2,345.99</strong>
-                <div className="inline-flex items-center mt-4 mb-2">
-                    <SfRating size="xs" value={3} max={5} />
-                    <SfCounter className="ml-1" size="xs">
-                        123
-                    </SfCounter>
-                    <SfLink href="#" variant="secondary" className="ml-2 text-xs text-neutral-500">
-                        123 reviews
-                    </SfLink>
-                </div>
-                <ul className="mb-4 font-normal typography-text-sm">
-                    <li>HD Pictures & Videos and FPV Function</li>
-                    <li>Intelligent Voice Control</li>
-                    <li>Multiple Fun Flights</li>
-                    <li>Easy to Use</li>
-                    <li>Foldable Design & Double Flight Time</li>
-                </ul>
+                <strong className="block font-bold typography-headline-3">{product?.formatted_price}</strong>
+                <div dangerouslySetInnerHTML={{ __html: product?.short_description }} />
                 <div className="py-4 mb-4 border-gray-200 border-y">
-                    <div className="bg-primary-100 text-primary-700 flex justify-center gap-1.5 py-1.5 typography-text-sm items-center mb-4 rounded-md">
-                        <SfIconShoppingCartCheckout />1 in cart
-                    </div>
+                    {
+                        cart[product?.item_code] && (
+                            <div className="bg-primary-100 text-primary-700 flex justify-center gap-1.5 py-1.5 typography-text-sm items-center mb-4 rounded-md">
+                                <SfIconShoppingCartCheckout />{cart[product?.item_code]} in cart
+                            </div>
+                        )
+                    }
                     <div className="items-start xs:flex">
                         <div className="flex flex-col items-stretch xs:items-center xs:inline-flex">
                             <div className="flex border border-neutral-300 rounded-md">
@@ -127,14 +113,15 @@ const Product = () => {
                                 </SfButton>
                             </div>
                             <p className="self-center mt-1 mb-4 text-xs text-neutral-500 xs:mb-0">
-                                <strong className="text-neutral-900">{max}</strong> in stock
+                                <strong className="text-neutral-900">{product?.in_stock ? "✔ In Stock" : "❌ sold out"}</strong>
                             </p>
                         </div>
-                        <SfButton type="button" size="lg" className="w-full xs:ml-4" slotPrefix={<SfIconShoppingCart size="sm" />}>
+                        <SfButton onClick={() => addToCart(product?.item_code, value)} type="button" size="lg" className="w-full xs:ml-4" slotPrefix={<SfIconShoppingCart size="sm" />}>
                             Add to cart
                         </SfButton>
                     </div>
                 </div>
+                <div dangerouslySetInnerHTML={{ __html: product?.web_long_description }} />
                 <div className="flex first:mt-4">
                     <SfIconPackage size="sm" className="flex-shrink-0 mr-1 text-neutral-500" />
                     <p className="text-sm">
