@@ -2,14 +2,15 @@ import { SfButton, SfIconAdd, SfIconRemove } from '@storefront-ui/react'
 import React from 'react'
 import { useCart } from '../hooks/useCart'
 import { useProducts } from '../hooks/useProducts'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-    const { cart, addToCart, removeFromCart, getTotal, isOpen, setIsOpen } = useCart()
+    const { cart, cartCount, addToCart, removeFromCart, getTotal, isOpen, setIsOpen } = useCart()
     const { getByItemCode } = useProducts()
+    const navigate = useNavigate()
     return (
         <aside className={`w-1/4 p-4 fixed top-0 right-0 overflow-y-auto h-full transition-all ease-in-out duration-500 ${isOpen ? "" : "translate-x-full"}`}>
             <div className="relative">
-
                 <div className="fixed overflow-hidden">
                     <div className="fixed  overflow-hidden">
                         <div className="pointer-events-none fixed inset-y-0 right-0 flex pl-10">
@@ -36,7 +37,7 @@ const Cart = () => {
                                                         Object.entries(cart).map(([itemCode, qty]) => {
                                                             const product = getByItemCode(itemCode)
                                                             return (
-                                                                <li className="flex py-6">
+                                                                <li key={itemCode} className="flex py-6">
                                                                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                                         <img src={product?.website_image} alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." className="h-full w-full object-cover object-center" />
                                                                     </div>
@@ -108,11 +109,9 @@ const Cart = () => {
                                             <p>฿ {getTotal()}</p>
                                         </div>
                                         <p className="my-1 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                                        <SfButton className="w-full">
+                                        <SfButton className="w-full" disabled={cartCount == 0} onClick={() => navigate("/checkout")}>
                                             Checkout
                                         </SfButton>
-                                        <div className="mt-6">
-                                        </div>
                                     </div>
                                 </div>
                             </div>

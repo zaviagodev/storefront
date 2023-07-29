@@ -8,14 +8,18 @@ import './App.css'
 import { useEffect } from "react";
 import { ProductsProvider } from "./hooks/useProducts";
 import { CartProvider } from "./hooks/useCart";
-import { getTokenFromLocalStorage } from "./utils";
 import Cart from "./components/Cart";
+import Checkout from "./pages/Checkout";
+import Profile from "./pages/Profile";
+import { UserProvider } from "./hooks/useUser";
+import { getToken } from "./utils/helper";
+import BankInfoPage from "./pages/BankInfoPage";
 
 
 function App() {
   const navigate = useNavigate();
   useEffect(() => {
-    if (!getTokenFromLocalStorage()) {
+    if (!getToken()) {
       navigate("/login");
     }
   }, [navigate]);
@@ -26,20 +30,25 @@ function App() {
       tokenParams={{
         type: "token",
         useToken: true,
-        token: getTokenFromLocalStorage,
+        token: getToken,
       }}
     >
-      <ProductsProvider>
-        <CartProvider>
-          <NavHeader />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="products/:id" element={<Product />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
-          <Cart />
-        </CartProvider>
-      </ProductsProvider>
+      <UserProvider>
+        <ProductsProvider>
+          <CartProvider>
+            <NavHeader />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="products/:id" element={<Product />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/thankyou" element={<BankInfoPage />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+            <Cart />
+          </CartProvider>
+        </ProductsProvider>
+      </UserProvider>
     </FrappeProvider>
   )
 }

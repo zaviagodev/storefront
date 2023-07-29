@@ -3,16 +3,18 @@ import { useFormik } from 'formik';
 import { useFrappeAuth } from 'frappe-react-sdk';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getTokenFromLocalStorage } from '../utils';
+import { useUser } from '../hooks/useUser';
+import { getToken } from '../utils/helper';
 
 export default function Login() {
+    const { login } = useUser();
     const navigate = useNavigate();
     const {
         isLoading,
     } = useFrappeAuth();
 
     useEffect(() => {
-        if (getTokenFromLocalStorage()) {
+        if (getToken()) {
             navigate("/");
         }
     }, [])
@@ -22,19 +24,7 @@ export default function Login() {
             usr: 'umer2001.uf@gmail.com',
             pwd: 'admintoor',
         },
-        onSubmit: values => fetch("https://umer2002.aca.fc.zaviago.com/api/method/frappeauth_app.authentication.login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                usr: values.usr,
-                pwd: values.pwd,
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => localStorage.setItem("token", data.message.token))
-            .then(() => navigate("/"))
+        onSubmit: values => login(values.usr, values.pwd).then(() => navigate("/"))
     });
 
 

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
     SfButton,
     SfIconShoppingCart,
@@ -10,11 +9,11 @@ import {
 import viteLogo from '/vite.svg'
 import { useFrappeAuth } from 'frappe-react-sdk';
 import { useCart } from '../hooks/useCart';
+import { useNavigate } from 'react-router-dom';
 
 const NavHeader = () => {
-    const [inputValue, setInputValue] = useState('');
-    const { cart, setIsOpen } = useCart()
-    const cartCount = Object.keys(cart).length ?? 0
+    const navigate = useNavigate();
+    const { cartCount, setIsOpen } = useCart()
     const { currentUser } = useFrappeAuth()
 
     const actionItems = [
@@ -23,31 +22,31 @@ const NavHeader = () => {
             label: '',
             ariaLabel: 'Cart',
             role: 'button',
+            onClick: () => setIsOpen(true)
         },
         {
             icon: <SfIconFavorite />,
             label: '',
             ariaLabel: 'Wishlist',
             role: 'button',
+            onClick: () => null,
         },
         {
-            label: 'Log in',
+            label: currentUser ?? 'Log in',
             icon: <SfIconPerson />,
             ariaLabel: 'Log in',
             role: 'login',
+            onClick: () => currentUser ? navigate('/profile') : navigate('/login'),
         },
     ];
 
-    const search = (event) => {
-        event.preventDefault();
-        alert(`Successfully found 10 results for ${inputValue}`);
-    };
+
 
     return (
         <header className="flex justify-center w-full py-2 px-4 lg:py-5 lg:px-6 bg-white border-b border-neutral-200">
             <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full">
                 <a
-                    href="#"
+                    href="/"
                     aria-label="SF Homepage"
                     className="flex mr-4 focus-visible:outline focus-visible:outline-offset focus-visible:rounded-sm shrink-0"
                 >
@@ -81,13 +80,13 @@ const NavHeader = () => {
                                 variant="tertiary"
                                 square
                                 slotPrefix={actionItem.icon}
-                                onClick={() => setIsOpen(true)}
+                                onClick={actionItem.onClick}
                             >
                                 {actionItem.ariaLabel === 'Cart' && (
                                     <SfBadge content={cartCount} />
                                 )}
                                 {actionItem.role === 'login' && (
-                                    <p className="hidden xl:inline-flex whitespace-nowrap">{currentUser ?? actionItem.label}</p>
+                                    <p className="hidden xl:inline-flex whitespace-nowrap">{actionItem.label}</p>
                                 )}
                             </SfButton>
                         ))}
