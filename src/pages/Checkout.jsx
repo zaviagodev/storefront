@@ -49,8 +49,8 @@ const Checkout = () => {
 
 
     return (
-        <div className='flex gap-8 justify-center'>
-            <form className="w-3/5 p-4 flex gap-4 flex-wrap text-neutral-900">
+        <div className='flex flex-col md:flex-row gap-8 justify-center'>
+            <form className="p-4 md:w-3/5 flex gap-4 flex-wrap text-neutral-900">
                 <AddressOptions
                     onChange={value => formik.setFieldValue('billing_address', value)}
                     value={formik.values.billing_address}
@@ -74,7 +74,7 @@ const Checkout = () => {
                 }
                 <PaymentMethods onChange={value => formik.setFieldValue('payment_method', value)} value={formik.values.payment_method} error={formik.errors.payment_method} />
             </form>
-            <div className='w-2/5 p-4'>
+            <div className='p-4 md:w-2/5'>
                 <div className="md:shadow-lg md:rounded-md md:border md:border-neutral-100">
                     <div className="flex justify-between items-end bg-neutral-100 md:bg-transparent py-2 px-4 md:px-6 md:pt-6 md:pb-4">
                         <p className="typography-headline-4 font-bold md:typography-headline-3">Order Summary</p>
@@ -205,7 +205,7 @@ function AddressOptions({
         <>
             <div className="flex flex-wrap gap-4 lg:gap-6">
                 {data?.message?.map(({ name: nameVal, address_title, address_line2 = null, city, state, country }) => (
-                    <label key={nameVal} className="relative" onClick={() => onChange(nameVal)}>
+                    <label key={nameVal} className="relative xs:w-full md:w-auto" onClick={() => onChange(nameVal)}>
                         <div className={`cursor-pointer rounded-md -outline-offset-2 hover:border-primary-200 hover:bg-primary-100 peer-focus:border-primary-200 peer-focus:bg-primary-100 ${value == nameVal ? "border-primary-300 bg-primary-100 outline outline-2 outline-primary-700" : ""}`}>
                             <AddressCard title={address_title} addressLine2={address_line2} city={city} state={state === "Select One" ? null : state} country={country} />
                         </div>
