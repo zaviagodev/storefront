@@ -14,7 +14,7 @@ const ProductCard = ({
     const { addToCart } = useCart()
     return (
         <Link to={`/products/${productId}`}>
-            <div className="border border-neutral-200 rounded-md hover:shadow-lg max-w-[300px]">
+            <div className="border border-neutral-200 rounded-md hover:shadow-lg max-w-[150px]">
                 <div className="relative">
                     <SfLink href="#" className="block">
                         <img
