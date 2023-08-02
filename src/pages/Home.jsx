@@ -55,7 +55,7 @@ const Home = () => {
 
                 <div className='flex mt-[2px]'>
                   <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
-                    Wallet
+                    <Link to="/my-account">Wallet</Link>
                   </div>
                   <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
                     Coins

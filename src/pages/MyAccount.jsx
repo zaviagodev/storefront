@@ -132,7 +132,7 @@ const MyAccount = () => {
     {
       icon: <LogOut02 />,
       title: 'ออกจากระบบ',
-      link: '#'
+      link: '/welcome'
     },
   ]
   return (
