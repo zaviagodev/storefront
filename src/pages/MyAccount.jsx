@@ -94,15 +94,15 @@ const MyAccount = () => {
           <hr style={{borderColor:"#F2F2F2"}}/>
 
           <div className='p-5 w-full flex'>
-            <Link to="#" className='text-sm flex flex-col items-center text-center'>
+            <Link to="#" className='basis-1/3 text-sm flex flex-col items-center text-center'>
               <Heart color='#333333'/>
               รายการสินค้า<br/>ที่ถูกใจ
             </Link>
-            <Link to="#" className='text-sm flex flex-col items-center text-center'>
+            <Link to="#" className='basis-1/3 text-sm flex flex-col items-center text-center'>
               <File06 color='#333333'/>
               คำสั่งซื้อ<br/>ของฉัน
             </Link>
-            <Link to="#" className='text-sm flex flex-col items-center text-center'>
+            <Link to="#" className='basis-1/3 text-sm flex flex-col items-center text-center'>
               <ClockRewind color='#333333'/>
               สินค้าที่<br/>ดูล่าสุด
             </Link>
@@ -111,8 +111,8 @@ const MyAccount = () => {
           <hr style={{borderColor:"#F2F2F2"}}/>
 
           <div className='inline-block w-full'>
-            <button className='p-5 w-1/2 border-r border-r-['>การใช้งานคะแนน</button>
-            <button className='p-5 w-1/2'>ระดับคะแนน</button>
+            <button className='p-4 my-2 w-1/2 border-r border-r-[#F2F2F2]'>การใช้งานคะแนน</button>
+            <button className='p-4 my-2 w-1/2'>ระดับคะแนน</button>
           </div>
         </div>
 
