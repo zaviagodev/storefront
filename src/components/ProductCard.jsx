@@ -14,7 +14,7 @@ const ProductCard = ({
     const { addToCart } = useCart()
     return (
         <Link to={`/products/${productId}`}>
-            <div className="border border-neutral-200 rounded-md hover:shadow-lg max-w-[150px]">
+            <div className="rounded-md hover:shadow-lg min-w-[150px] max-w-[150px]">
                 <div className="relative">
                     <SfLink href="#" className="block">
                         <img
@@ -25,7 +25,7 @@ const ProductCard = ({
                             height="300"
                         />
                     </SfLink>
-                    <SfButton
+                    {/* <SfButton
                         type="button"
                         variant="tertiary"
                         size="sm"
@@ -34,29 +34,29 @@ const ProductCard = ({
                         aria-label="Add to wishlist"
                     >
                         <SfIconFavorite size="sm" />
-                    </SfButton>
+                    </SfButton> */}
                 </div>
-                <div className="p-4 border-t border-neutral-200">
-                    <SfLink href="#" variant="secondary" className="no-underline">
+                <div className="py-4">
+                    <SfLink href="#" variant="secondary" className="no-underline text-[#1C1C1C] text-xs">
                         {title}
                     </SfLink>
-                    <div className="flex items-center pt-1">
+                    {/* <div className="flex items-center pt-1">
                         <SfRating size="xs" value={5} max={5} />
 
                         <SfLink href="#" variant="secondary" className="pl-1 no-underline">
                             <SfCounter size="xs">{123}</SfCounter>
                         </SfLink>
-                    </div>
-                    <p className="block py-2 font-normal typography-text-sm text-neutral-700">
+                    </div> */}
+                    {/* <p className="block py-2 font-normal typography-text-sm text-neutral-700">
                         Lightweight • Non slip • Flexible outsole • Easy to wear on and off
-                    </p>
-                    <span className="block pb-2 font-bold typography-text-lg">{price}</span>
-                    <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />} onClick={(e) => {
+                    </p> */}
+                    <span className="block pb-2 font-bold text-sm text-[#D10000]">{price}</span>
+                    {/* <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />} onClick={(e) => {
                         e.preventDefault();
                         addToCart(itemCode)
                     }}>
                         Add to cart
-                    </SfButton>
+                    </SfButton> */}
                 </div>
             </div>
         </Link>

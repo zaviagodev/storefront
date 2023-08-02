@@ -19,6 +19,9 @@ import activity8 from '../img/activity8.svg'
 import discountfive from '../img/discountfive.png'
 import promotion1 from '../img/promotion1.png'
 import promotion2 from '../img/promotion2.png'
+import bannerDiscount1 from '../img/banner-discount1.png'
+import bannerDiscount2 from '../img/banner-discount2.png'
+import BlogCard from '../components/BlogCard';
 
 const Home = () => {
     const { updateCurrentUser } = useFrappeAuth();
@@ -31,31 +34,31 @@ const Home = () => {
     return (
         <>
             <img src={banner} className='w-full absolute top-0 left-0 max-h-[240px] object-cover'/>
-            <header className='m-3 bg-white relative pl-5 py-3 m-auto rounded-[6px] mt-[30%] flex' style={{filter:"drop-shadow(0 4px 20px #00000040)",width:"calc(100% - 24px)"}}>
-              <div className='w-[80%]'>
+            <header className='m-3 bg-white relative pl-5 py-1 m-auto rounded-[6px] mt-[30%] flex' style={{filter:"drop-shadow(0 4px 20px #00000040)",width:"calc(100% - 24px)"}}>
+              <div className='w-[80%] py-2'>
                 <div className='flex'>
-                  <div className='basis-1/3 flex gap-x-1'>
+                  <div className='basis-1/3 flex gap-x-1 text-[13px]'>
                     <span>฿ </span>
                     850
                   </div>
-                  <div className='basis-1/3 flex gap-x-1'>
+                  <div className='basis-1/3 flex gap-x-1 text-[13px]'>
                     <img src={coin}/>
                     230
                   </div>
-                  <div className='basis-1/3 flex gap-x-1'>
+                  <div className='basis-1/3 flex gap-x-1 text-[13px]'>
                     <img src={coupon}/>
                     8
                   </div>
                 </div>
 
-                <div className='flex'>
-                  <div className='basis-1/3'>
+                <div className='flex mt-[2px]'>
+                  <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
                     Wallet
                   </div>
-                  <div className='basis-1/3'>
+                  <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
                     Coins
                   </div>
-                  <div className='basis-1/3'>
+                  <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
                     Coupon
                   </div>
                 </div>
@@ -71,45 +74,45 @@ const Home = () => {
               <div className='flex gap-2 px-3'>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity1} className='w-fit mx-auto'/>
-                  <p className='text-xs'>Offer ส่วนลด</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>Offer ส่วนลด</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity2} className='w-fit mx-auto' />
-                  <p className='text-xs'>โปรโมชั่น <br/>50 %</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>โปรโมชั่น <br/>50 %</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity3} className='w-fit mx-auto'/>
-                  <p className='text-xs'>Boxing Day <br/>ขายยกลัง</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>Boxing Day <br/>ขายยกลัง</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity4} className='w-fit mx-auto' />
-                  <p className='text-xs'>โปรสุดคุ้ม <br/>Mege Sale</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>โปรสุดคุ้ม <br/>Mege Sale</p>
                 </picture>
               </div>
-              <div className='flex gap-2 mt-2 px-3'>
+              <div className='flex gap-2 mt-[26px] px-3'>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity5} className='w-fit mx-auto'/>
-                  <p className='text-xs'>ใส่ CYBER ลด <br/>100 บ.</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>ใส่ CYBER ลด <br/>100 บ.</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity6} className='w-fit mx-auto' />
-                  <p className='text-xs'>ยินดีต้อนรับ <br/>กลับมา</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>ยินดีต้อนรับ <br/>กลับมา</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity7} className='w-fit mx-auto'/>
-                  <p className='text-xs'>ลดสูงสุด <br/>60 %</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>ลดสูงสุด <br/>60 %</p>
                 </picture>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity8} className='w-fit mx-auto' />
-                  <p className='text-xs'>อื่นๆ</p>
+                  <p className='text-xs text-[#1C1C1C] mt-3'>อื่นๆ</p>
                 </picture>
               </div>
 
-              <h2 className='mt-[30px] px-3'>Celebrate Mid Year Festival</h2>
+              <h2 className='mt-[30px] px-3 inter font-semibold text-[#3D3D3D]'>Celebrate Mid Year Festival</h2>
               
               <div className='mt-3 flex overflow-x-scroll gap-x-6 px-3'>
-                <PromotionCard link="/checkout" title="Want to test" image={discountfive} date="อายุการใช้งาน 1 เดือนหลังจากได้รับคูปอง" />
-                <PromotionCard link="/checkout" title="Want to test" image={discountfive} date="อายุการใช้งาน 1 เดือนหลังจากได้รับคูปอง" />
+                <PromotionCard link="/checkout" title="ของขวัญแสนพิเศษในวันที่แสนพิเศษ รับทันที ส่วนลด 50 % สำหรับเดือนเกิด" image={discountfive} date="อายุการใช้งาน 1 เดือนหลังจากได้รับคูปอง" />
+                <PromotionCard link="/checkout" title="ของขวัญแสนพิเศษในวันที่แสนพิเศษ รับทันที ส่วนลด 50 % สำหรับเดือนเกิด" image={discountfive} date="อายุการใช้งาน 1 เดือนหลังจากได้รับคูปอง" />
               </div>
 
               <div className='flex flex-col gap-y-[11px] mt-[30px] px-3'>
@@ -118,9 +121,9 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] px-3'>
+                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-3 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px]"/>
+                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-3">
@@ -137,9 +140,9 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] px-3'>
+                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-3 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px]"/>
+                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-3">
@@ -156,9 +159,9 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] px-3'>
+                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-3 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px]"/>
+                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-3">
@@ -171,6 +174,18 @@ const Home = () => {
                       price={product.formatted_price}
                       thumbnail={product.website_image ? product.website_image : "https://storage.googleapis.com/sfui_docs_artifacts_bucket_public/production/sneakers.png"} />
                   ))}
+                </div>
+              </div>
+
+              <div className="mt-[30px]">
+                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-3 mb-[14px]'>
+                  สินค้าลดราคา
+                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
+                </h2>
+
+                <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-3">
+                  <BlogCard image={bannerDiscount1} title="รวมคูปองและโค๊ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
+                  <BlogCard image={bannerDiscount2} title="รวมคูปองและโค๊ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
                 </div>
               </div>
             </main>

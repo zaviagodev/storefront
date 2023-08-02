@@ -11,3 +11,22 @@
   filter: blur(0px);
   transition: filter 0.5s linear;
 }
+
+@font-face {
+  font-family: Eventpop;
+  src: url('../src/fonts/eventpop/eventpop-medium.ttf');
+}
+
+@font-face {
+  font-family: Eventpop;
+  src: url('../src/fonts/eventpop/eventpop-bold.ttf');
+  font-weight: bold
+}
+
+* {
+  font-family:Eventpop, Inter
+}
+
+.inter {
+  font-family:'Inter', sans-serif
+}
