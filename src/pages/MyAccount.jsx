@@ -3,12 +3,19 @@ import avatarImg from '../img/avatar.svg'
 import silverCard from '../img/silvercard.svg'
 import qrcode from '../img/qrcode.svg'
 import recentViews from '../img/clock-rewind.svg'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Heart, File06, ClockRewind, MarkerPin01, ChevronRight, CreditCard02 } from '@untitled-ui/icons-react'
 
 const MyAccount = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
   const [silverLevel, setSilverLevel] = useState(true);
+
+  const { updateCurrentUser } = useFrappeAuth();
+  const { products } = useProducts()
+
+  useEffect(() => {
+      updateCurrentUser()
+  }, [updateCurrentUser])
 
   const AccountMenu = ({icon, title, link}) => {
     return (
