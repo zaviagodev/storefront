@@ -5,13 +5,13 @@ import qrcode from '../img/qrcode.svg'
 import recentViews from '../img/clock-rewind.svg'
 import { useState, useEffect } from 'react'
 import { Heart, File06, ClockRewind, MarkerPin01, ChevronRight, CreditCard02 } from '@untitled-ui/icons-react'
+import { useFrappeAuth } from 'frappe-react-sdk';
 
 const MyAccount = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
   const [silverLevel, setSilverLevel] = useState(true);
 
   const { updateCurrentUser } = useFrappeAuth();
-  const { products } = useProducts()
 
   useEffect(() => {
       updateCurrentUser()
