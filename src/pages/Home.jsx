@@ -22,6 +22,7 @@ import promotion2 from '../img/promotion2.png'
 import bannerDiscount1 from '../img/banner-discount1.png'
 import bannerDiscount2 from '../img/banner-discount2.png'
 import BlogCard from '../components/BlogCard';
+import NavHeader from '../components/NavHeader'
 
 const Home = () => {
     const { updateCurrentUser } = useFrappeAuth();
@@ -33,8 +34,9 @@ const Home = () => {
 
     return (
         <>
-            <img src={banner} className='w-full absolute top-0 left-0 max-h-[240px] object-cover'/>
-            <header className='m-3 bg-white relative pl-5 py-1 m-auto rounded-[6px] mt-[30%] flex' style={{filter:"drop-shadow(0 4px 20px #00000040)",width:"calc(100% - 40px)"}}>
+          <NavHeader />
+            <img src={banner} className='w-full left-0 max-h-[240px] object-cover'/>
+            <header className='m-3 bg-white relative pl-5 py-1 m-auto rounded-[6px] top-[-80px] flex' style={{filter:"drop-shadow(0 4px 20px #00000040)",width:"calc(100% - 40px)"}}>
               <div className='w-[80%] py-2'>
                 <div className='flex'>
                   <div className='basis-1/3 flex gap-x-1 text-[13px]'>
@@ -72,7 +74,7 @@ const Home = () => {
                 </div>
               </div>
             </header>
-            <main className='relative py-3'>
+            <main className='relative top-[-40px] pb-3'>
               <div className='flex gap-2 px-5'>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity1} className='w-fit mx-auto'/>

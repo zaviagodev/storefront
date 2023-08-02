@@ -1,7 +1,6 @@
 import { FrappeProvider } from "frappe-react-sdk";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./pages/Login";
-import NavHeader from "./components/NavHeader";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import './App.css'
@@ -15,6 +14,8 @@ import { UserProvider } from "./hooks/useUser";
 import { getToken } from "./utils/helper";
 import BankInfoPage from "./pages/BankInfoPage";
 import MyAccount from "./pages/MyAccount";
+import ShippingAddress from "./pages/address/ShippingAddress";
+import AddShippingAddress from "./pages/address/ShippingAddressAdd";
 
 function App() {
   const navigate = useNavigate();
@@ -36,7 +37,6 @@ function App() {
       <UserProvider>
         <ProductsProvider>
           <CartProvider>
-            <NavHeader />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="products/:id" element={<Product />} />
@@ -45,6 +45,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/my-account" element={<MyAccount />}/>
+              <Route path="/shipping-address" element={<ShippingAddress />}/>
+              <Route path="/shipping-address/add" element={<AddShippingAddress />}/>
             </Routes>
             <Cart />
           </CartProvider>

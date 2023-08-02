@@ -4,18 +4,43 @@ import silverCard from '../img/silvercard.svg'
 import qrcode from '../img/qrcode.svg'
 import recentViews from '../img/clock-rewind.svg'
 import { useState, useEffect } from 'react'
-import { Heart, File06, ClockRewind, MarkerPin01, ChevronRight, CreditCard02 } from '@untitled-ui/icons-react'
-import { useFrappeAuth } from 'frappe-react-sdk';
+import NavHeader from '../components/NavHeader'
+import { 
+    Heart,
+    File06,
+    ClockRewind,
+    MarkerPin01,
+    ChevronRight,
+    CreditCard02,
+    Globe02,
+    Shield01,
+    Lock02,
+    Building02,
+    BookClosed,
+    Gift01,
+    AnnotationQuestion,
+    AnnotationDots,
+    ImageIndentLeft,
+    FileShield02,
+    LogOut02
+} from '@untitled-ui/icons-react'
+import { useFrappeAuth, useFrappeGetDoc } from 'frappe-react-sdk';
 
 const MyAccount = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
   const [silverLevel, setSilverLevel] = useState(true);
 
-  const { updateCurrentUser } = useFrappeAuth();
+  const { currentUser, updateCurrentUser } = useFrappeAuth();
+
+  const { data, isLoading, error } = useFrappeGetDoc('User', currentUser, {
+    filters: ['name', 'full_name', 'user_image']
+  })
 
   useEffect(() => {
       updateCurrentUser()
   }, [updateCurrentUser])
+
+  console.log(data, isLoading, error)
 
   const AccountMenu = ({icon, title, link}) => {
     return (
@@ -35,29 +60,115 @@ const MyAccount = () => {
     {
       icon: <MarkerPin01 />,
       title: 'ที่อยู่ในการจัดส่ง',
-      link: '#'
+      link: '/shipping-address'
     },
     {
       icon: <CreditCard02 />,
       title: 'การชำระเงิน',
       link: '#'
+    },
+    {
+      icon: <Globe02 />,
+      title: 'ประเทศและภาษา',
+      link: '#'
+    },
+    {
+      icon: <Shield01 />,
+      title: 'ข้อกำหนดและเงื่อนไข',
+      link: '#'
+    },
+    {
+      icon: <Lock02 />,
+      title: 'ความยินยอมในการเปิดเผยข้อมูล',
+      link: '#'
     }
   ]
+
+  const helpMenu = [
+    {
+      icon: <Building02 />,
+      title: 'หน้าร้านของเรา',
+      link: '#'
+    },
+    {
+      icon: <BookClosed />,
+      title: 'วิธีเก็บคะแนน',
+      link: '#'
+    },
+    {
+      icon: <Gift01 />,
+      title: 'วิธีแลกของรางวัล',
+      link: '#'
+    },
+    {
+      icon: <CreditCard02 />,
+      title: 'เงื่อนไขระดับของสมาชิก',
+      link: '#'
+    },
+    {
+      icon: <AnnotationQuestion />,
+      title: 'คำถามที่พบบ่อย',
+      link: '#'
+    },
+    {
+      icon: <AnnotationDots />,
+      title: 'ติดต่อเรา',
+      link: '#'
+    }
+  ]
+
+  const additionMenu = [
+    {
+      icon: <ImageIndentLeft />,
+      title: 'เกี่ยวกับแอปฟิเคชั่น',
+      link: '#'
+    },
+    {
+      icon: <FileShield02 />,
+      title: 'นโยบายความเป็นส่วนตัว',
+      link: '#'
+    }
+  ]
+
+  const accountMenu = [
+    {
+      icon: <LogOut02 />,
+      title: 'ออกจากระบบ',
+      link: '#'
+    },
+  ]
   return (
-    <div className='bg-[#F4F4F4]'>
-      <header className="absolute top-0 pt-20 pb-[60px] px-5 bg-[#BBE5BB] w-full">
-        <div className='flex items-center'>
-          <img src={avatarImg} />
-          <div className='ml-3 flex flex-col'>
-            <span className='font-bold'>ศิริรัตณ์ เจริญศิริ</span>
-            <Link className='flex items-center gap-x-1'>
-              แก้ไขโปรไฟล์ของฉัน
-              <ChevronRight color="#333333" />
-            </Link>
+    <div className='bg-[#F4F4F4] h-full'>
+      <NavHeader />
+      <header className="pt-20 pb-[60px] px-5 bg-[#BBE5BB] w-full">
+        {data && (
+          <div className='flex items-center'>
+            <img src={data.user_image} width="64" className='rounded-[99px]'/>
+            <div className='ml-3 flex flex-col'>
+              <span className='font-bold'>{data.full_name}</span>
+              <Link className='flex items-center gap-x-1'>
+                แก้ไขโปรไฟล์ของฉัน
+                <ChevronRight color="#333333" />
+              </Link>
+            </div>
           </div>
-        </div>
+        )}
+        {error && (
+          <div className='flex items-center'>
+            <svg className="h-[64px] w-[64px] bg-white text-gray-300 rounded-[99px]" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <div className='ml-3 flex flex-col'>
+              <span className='font-bold'>Loading...</span>
+              <Link className='flex items-center gap-x-1'>
+                แก้ไขโปรไฟล์ของฉัน
+                <ChevronRight color="#333333" />
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
-      <main className='px-5 relative top-[80px]'>
+      <main className='px-5 relative top-[-40px] pb-[100px]'>
         <div className='bg-white rounded-[6px] items-center' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
           <div className='flex justify-between p-5'>
             <div className='flex items-center gap-x-[14px]'>
@@ -123,9 +234,30 @@ const MyAccount = () => {
           </div>
         </div>
 
-        <h2 className='mt-[30px]'>การตั้งค่า</h2>
+        <h2 className='mt-[30px] mb-[10px]'>การตั้งค่า</h2>
         <div className='flex flex-col bg-white rounded-[6px] items-center gap-y-[10px]' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
           {settingsMenu.map((menu) => 
+            <AccountMenu icon={menu.icon} title={menu.title} link={menu.link} />
+          )}
+        </div>
+
+        <h2 className='mt-[30px] mb-[10px]'>ความช่วยเหลือ</h2>
+        <div className='flex flex-col bg-white rounded-[6px] items-center gap-y-[10px]' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
+          {helpMenu.map((menu) => 
+            <AccountMenu icon={menu.icon} title={menu.title} link={menu.link} />
+          )}
+        </div>
+
+        <h2 className='mt-[30px] mb-[10px]'>ข้อมูลเพิ่มเติม</h2>
+        <div className='flex flex-col bg-white rounded-[6px] items-center gap-y-[10px]' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
+          {additionMenu.map((menu) => 
+            <AccountMenu icon={menu.icon} title={menu.title} link={menu.link} />
+          )}
+        </div>
+
+        <h2 className='mt-[30px] mb-[10px]'>บัญชี</h2>
+        <div className='flex flex-col bg-white rounded-[6px] items-center gap-y-[10px]' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
+          {accountMenu.map((menu) => 
             <AccountMenu icon={menu.icon} title={menu.title} link={menu.link} />
           )}
         </div>
