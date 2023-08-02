@@ -45,7 +45,7 @@ const MyAccount = () => {
             <span className='font-bold'>ศิริรัตณ์ เจริญศิริ</span>
             <Link className='flex items-center gap-x-1'>
               แก้ไขโปรไฟล์ของฉัน
-              <ChevronRight />
+              <ChevronRight color="#333333" />
             </Link>
           </div>
         </div>
@@ -91,7 +91,7 @@ const MyAccount = () => {
             </div>
           </div>
 
-          <hr />
+          <hr style={{borderColor:"#F2F2F2"}}/>
 
           <div className='p-5 w-full flex'>
             <Link to="#" className='text-sm flex flex-col items-center text-center'>
@@ -108,11 +108,11 @@ const MyAccount = () => {
             </Link>
           </div>
 
-          <hr />
+          <hr style={{borderColor:"#F2F2F2"}}/>
 
-          <div className='flex justify-center'>
-            <button className='p-5'>การใช้งานคะแนน</button>
-            <button className='p-5'>ระดับคะแนน</button>
+          <div className='inline-block w-full'>
+            <button className='p-5 w-1/2 border-r border-r-['>การใช้งานคะแนน</button>
+            <button className='p-5 w-1/2'>ระดับคะแนน</button>
           </div>
         </div>
 
