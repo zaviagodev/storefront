@@ -94,7 +94,7 @@ const Signup = () => {
 
             <p className="text-center mt-[43px]">I didn't receive a code <strong>Resend</strong></p>
 
-            <Link to="/fill-info" className={`mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</Link>
+            <Link to="/fill-info" className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</Link>
           </main>
         </>
       )}
