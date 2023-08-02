@@ -16,6 +16,10 @@ import BankInfoPage from "./pages/BankInfoPage";
 import MyAccount from "./pages/MyAccount";
 import ShippingAddress from "./pages/address/ShippingAddress";
 import AddShippingAddress from "./pages/address/ShippingAddressAdd";
+import Welcome from "./pages/register/Welcome";
+import Signup from "./pages/register/Signup";
+import FillInfo from "./pages/register/FillInfo";
+import Success from "./pages/register/Success";
 
 function App() {
   const navigate = useNavigate();
@@ -45,6 +49,10 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/my-account" element={<MyAccount />}/>
+              <Route path="/welcome" element={<Welcome />}/>
+              <Route path="/signup" element={<Signup />}/>
+              <Route path="/fill-info" element={<FillInfo />}/>
+              <Route path="/success" element={<Success />}/>
               <Route path="/shipping-address" element={<ShippingAddress />}/>
               <Route path="/shipping-address/add" element={<AddShippingAddress />}/>
             </Routes>

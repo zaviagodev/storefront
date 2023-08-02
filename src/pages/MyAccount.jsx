@@ -40,8 +40,6 @@ const MyAccount = () => {
       updateCurrentUser()
   }, [updateCurrentUser])
 
-  console.log(data, isLoading, error)
-
   const AccountMenu = ({icon, title, link}) => {
     return (
       <Link to={link} className='flex justify-between items-center px-5 py-[17px] w-full'>
