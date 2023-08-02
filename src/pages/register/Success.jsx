@@ -10,9 +10,9 @@ const Success = () => {
   return (
     <>
       <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
-        <button onClick={() => location.href = "/signup"}>
+        <Link to="/signup">
           <ArrowLeft />
-        </button>
+        </Link>
         เปลี่ยนเบอร์โทร
       </header>
       <main className='px-5 py-[46px]'>

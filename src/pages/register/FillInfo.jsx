@@ -10,9 +10,9 @@ const FillInfo = () => {
   return (
     <>
       <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
-        <button onClick={() => location.href = "/signup"}>
+        <Link to="/signup">
           <ArrowLeft />
-        </button>
+        </Link>
         สมัครสมาชิก
       </header>
       <main className='px-5 py-[46px]'>
@@ -42,7 +42,7 @@ const FillInfo = () => {
         </form>
       </main>
       <footer className='flex px-5 gap-x-3'>
-        <button onClick={() => location.href = '/success'} className={`w-full text-white rounded-[9px] p-3 text-center ${!filledInfo ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledInfo}>ดำเนินการต่อ</button>
+        <Link to="/success" className={`w-full text-white rounded-[9px] p-3 text-center ${!filledInfo ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledInfo}>ดำเนินการต่อ</Link>
       </footer>
     </>
   )
