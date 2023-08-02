@@ -14,7 +14,7 @@ import Profile from "./pages/Profile";
 import { UserProvider } from "./hooks/useUser";
 import { getToken } from "./utils/helper";
 import BankInfoPage from "./pages/BankInfoPage";
-
+import MyAccount from "./pages/MyAccount";
 
 function App() {
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ function App() {
               <Route path="/thankyou" element={<BankInfoPage />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/my-account" element={<MyAccount />}/>
             </Routes>
             <Cart />
           </CartProvider>

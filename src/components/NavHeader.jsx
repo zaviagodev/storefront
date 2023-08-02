@@ -6,7 +6,6 @@ import {
     SfIconMenu,
     SfBadge,
 } from '@storefront-ui/react';
-import viteLogo from '/vite.svg'
 import brandLogo from '../img/logo.svg'
 import cartIcon from '../img/cart.svg'
 import messageIcon from '../img/message-circle.svg'
@@ -38,8 +37,8 @@ const NavHeader = () => {
     ];
 
     return (
-        <header className="relative flex justify-center w-full py-2 px-4 lg:py-5 lg:px-6 bg-transparent z-[999]">
-            <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full">
+        <header className="relative flex justify-center w-full z-[999]">
+            <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full bg-[#FFFFFF94] py-2 px-4 mx-5 my-3 rounded-[9px]">
                 <a
                   href="/"
                   aria-label="SF Homepage"
@@ -60,7 +59,7 @@ const NavHeader = () => {
                         {actionItems.map((actionItem) => (
                             <SfButton
                               key={actionItem.ariaLabel}
-                              className="relative ml-2 rounded-[99px] bg-white hover:bg-white"
+                              className="relative ml-2 rounded-[99px] hover:bg-white"
                               aria-label={actionItem.ariaLabel}
                               variant="tertiary"
                               square
