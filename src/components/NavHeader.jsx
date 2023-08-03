@@ -38,8 +38,8 @@ const NavHeader = () => {
     ];
 
     return (
-        <header className="flex justify-center w-full z-[999] absolute top-0">
-            <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full bg-[#FFFFFF94] py-2 px-4 mx-5 my-3 rounded-[9px]">
+        <header className="flex justify-center w-full z-[999] fixed top-0">
+            <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full bg-[#FFFFFF94] py-2 px-4 mx-5 my-3 rounded-[9px]" style={{backdropFilter:"blur(3px)"}}>
                 <a
                   href="/"
                   aria-label="SF Homepage"
