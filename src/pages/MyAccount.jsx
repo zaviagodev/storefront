@@ -191,7 +191,7 @@ const MyAccount = () => {
                 Coins
               </div>
               <div className='basis-1/3 flex gap-x-1 text-[13px] justify-center'>
-                Coupon
+                <Link to="/my-coupon">Coupon</Link>
               </div>
             </div>
 
@@ -203,7 +203,7 @@ const MyAccount = () => {
                 230 <span className='text-[#FFA800]'>coins</span>
               </div>
               <div className='basis-1/3 flex gap-x-1 text-[13px] justify-center'>
-                8 <span className='text-[#BC0000]'>โค๊ด</span>
+                8 <span className='text-[#BC0000]'>โค้ด</span>
               </div>
             </div>
           </div>

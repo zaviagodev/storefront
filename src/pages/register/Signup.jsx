@@ -1,7 +1,7 @@
 import { useRef, useState } from "react"
 import { Link } from 'react-router-dom'
 import logo from '../../img/logo.svg'
-import { ArrowLeft, MarkerPin01 } from '@untitled-ui/icons-react'
+import { ArrowLeft, MarkerPin01, ArrowCircleRight } from '@untitled-ui/icons-react'
 
 const Signup = () => {
   const [phonePage, setPhonePage] = useState(true);
@@ -44,24 +44,27 @@ const Signup = () => {
             <p className='mt-4'>กรอกเบอร์มือถือของคุณและกดรับรหัสยืนยันทาง SMS (OTP) เพื่อยืนยันเบอร์มือถือของคุณ</p>
 
             <div className="flex gap-x-3">
-              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px]'>
+              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 mt-[11px] w-[40%]'>
                 <option value="thailand">
-                  🇹🇭
                   +66
                 </option>
                 <option value="germany">
-                  🇩🇪
                   +49
                 </option>
               </select>
 
-              <input type="tel" id="phone" autoComplete="off" ref={telRef} className={`border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full`} onInput={(e) => {
-                if (e.target.value !== ""){
-                  setFilledPhone(true)
-                } else {
-                  setFilledPhone(false)
-                }
-              }} onKeyDown={() => setPhoneError(false)}/>
+              <div className="relative">
+                <input type="tel" id="phone" autoComplete="off" ref={telRef} className={`relative border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full`} onInput={(e) => {
+                  if (e.target.value !== ""){
+                    setFilledPhone(true)
+                  } else {
+                    setFilledPhone(false)
+                  }
+                }} onKeyDown={() => setPhoneError(false)}/>
+                <div className="absolute right-[12px] top-[21px]">
+                  <ArrowCircleRight color="#6F7380"/>
+                </div>
+              </div>
             </div>
 
             {!phoneError ? "" : (<p className="text-[#EC5454] inter mt-2">This phone number is invalid</p>)}

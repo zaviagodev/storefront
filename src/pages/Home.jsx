@@ -62,7 +62,7 @@ const Home = () => {
                     Coins
                   </div>
                   <div className='basis-1/3 inter text-xs text-[#4C4B4F]'>
-                    Coupon
+                    <Link to="/my-coupon">Coupon</Link>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ const Home = () => {
                 <img src={promotion2} />
               </div>
 
-              <div className='mt-[30px]'>
+              <div className='mt-[22px]'>
                 <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
@@ -144,7 +144,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className='mt-[30px]'>
+              <div className='mt-[22px]'>
                 <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
@@ -163,7 +163,7 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className='mt-[30px]'>
+              <div className='mt-[22px]'>
                 <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>

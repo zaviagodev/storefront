@@ -51,8 +51,8 @@ const ProductCard = ({
                         Lightweight • Non slip • Flexible outsole • Easy to wear on and off
                     </p> */}
                     <div className='flex items-center gap-x-[2px]'>
-                      <span className="block pb-2 font-medium text-sm text-[#D10000]">{price}</span>
-                      <span className="block pb-2 font-medium text-[10px] text-[#8A8A8A] line-through">฿ 30</span>
+                      <span className="block pb-2 font-medium text-sm text-black">{price}</span>
+                      <span className="block pb-2 font-medium ml-1 text-[10px] text-[#8A8A8A] line-through">฿ 30</span>
                     </div>
                     {/* <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />} onClick={(e) => {
                         e.preventDefault();
