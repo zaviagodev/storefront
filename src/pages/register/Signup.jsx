@@ -53,7 +53,7 @@ const Signup = () => {
                 </option>
               </select>
 
-              <input type="tel" id="phone" ref={telRef} className={`border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full`} onInput={(e) => {
+              <input type="tel" id="phone" autoComplete="off" ref={telRef} className={`border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full`} onInput={(e) => {
                 if (e.target.value !== ""){
                   setFilledPhone(true)
                 } else {
@@ -92,7 +92,7 @@ const Signup = () => {
             <div className="flex gap-x-[9px] mt-9">
               <input type="text" maxLength="1" id="num1" ref={num1Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false);
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -100,7 +100,7 @@ const Signup = () => {
               }}/>
               <input type="text" maxLength="1" id="num2" ref={num2Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false);
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -108,7 +108,7 @@ const Signup = () => {
               }} />
               <input type="text" maxLength="1" id="num3" ref={num3Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -116,7 +116,7 @@ const Signup = () => {
               }} />
               <input type="text" maxLength="1" id="num4" ref={num4Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -124,7 +124,7 @@ const Signup = () => {
               }} />
               <input type="text" maxLength="1" id="num5" ref={num5Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -132,7 +132,7 @@ const Signup = () => {
               }} />
               <input type="text" maxLength="1" id="num6" ref={num6Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" || num2Ref.current.value !== "" || num3Ref.current.value !== "" || num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
+                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
                   setFilledAllOtp(true)
                 } else {
                   setFilledAllOtp(false)
@@ -143,8 +143,7 @@ const Signup = () => {
             {!otperror ? (<p className="text-center mt-[43px]">I didn't receive a code <strong>Resend</strong></p>) : (<p className="text-center text-[#EC5454] inter mt-[43px]">Wrong code, please try again <strong>Resend</strong></p>)}
 
             <Link to={!filledAllOtp ? "" : "/fill-info"} onClick={() => {
-              console.log(filledAllOtp)
-              if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" && num5Ref.current.value !== "" && num6Ref.current.value !== ""){
+              if (num1Ref.current.value != "" && num2Ref.current.value != "" && num3Ref.current.value != "" && num4Ref.current.value != "" && num5Ref.current.value != "" && num6Ref.current.value != ""){
                 setOtperror(false)
               } else {
                 setOtperror(true)
