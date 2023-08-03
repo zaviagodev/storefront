@@ -17,11 +17,11 @@ const Success = () => {
       </header>
       <main className='px-5 py-[46px]'>
         <img src={successIcon} />
-        <h1 className='text-[30px] font-bold mt-5'>สมัครสมาชิก<br/>สำเร็จ 👋</h1>
+        <h1 className='text-[30px] font-bold mt-5'>ระบบเปลี่ยนเบอร์<br/>ใหม่สำเร็จ 👋</h1>
         <p className='mt-4'>คุณได้ทำการสมัครสมาชิกเรียบร้อย และคุณสามารถ<br/>เริ่มต้นการใช้งานได้ทันที</p>
       </main>
       <footer className='flex px-5 gap-x-3'>
-        <Link to="/" className='w-full bg-[#111111] border border-[#111111] text-white rounded-[9px] p-3 text-center'>เข้าสู่ร้านค้า</Link>
+        <Link to="/" className='w-full bg-[#111111] border border-[#111111] text-white rounded-[9px] p-3 text-center'>กลับไปหน้าเดิม</Link>
       </footer>
     </>
   )
