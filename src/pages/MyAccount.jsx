@@ -175,10 +175,10 @@ const MyAccount = () => {
               <div className='text-[#333333] font-bold'>ระดับ : {silverLevel ? "Silver" : ""}</div>
             </div>
             <div>
-              <button className='bg-[#00B14F] flex gap-x-2 text-white items-center text-sm p-1 rounded-[4px]'>
+              <Link to="/my-id" className='bg-[#00B14F] flex gap-x-2 text-white items-center text-sm p-1 rounded-[4px]'>
                 <img src={qrcode} />
                 ID ของฉัน
-              </button>
+              </Link>
             </div>
           </div>
 

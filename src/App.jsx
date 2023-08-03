@@ -21,6 +21,8 @@ import Welcome from "./pages/register/Welcome";
 import Signup from "./pages/register/Signup";
 import FillInfo from "./pages/register/FillInfo";
 import Success from "./pages/register/Success";
+import MyCoupon from "./pages/MyCoupon";
+import MyID from "./pages/MyID";
 
 function App() {
   const navigate = useNavigate();
@@ -50,6 +52,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/my-account" element={<MyAccount />}/>
+              <Route path="/my-id" element={<MyID />}/>
+              <Route path="/my-coupon" element={<MyCoupon />}/>
               <Route path="/welcome" element={<Welcome />}/>
               <Route path="/signup" element={<Signup />}/>
               <Route path="/fill-info" element={<FillInfo />}/>
