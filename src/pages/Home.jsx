@@ -23,6 +23,7 @@ import bannerDiscount1 from '../img/banner-discount1.png'
 import bannerDiscount2 from '../img/banner-discount2.png'
 import BlogCard from '../components/BlogCard';
 import NavHeader from '../components/NavHeader'
+import FooterMenu from '../components/FooterMenu';
 
 const Home = () => {
     const { updateCurrentUser } = useFrappeAuth();
@@ -74,7 +75,7 @@ const Home = () => {
                 </div>
               </div>
             </header>
-            <main className='relative top-[-10px] pb-3'>
+            <main className='relative top-[-10px] pb-[94px]'>
               <div className='flex gap-2 px-5'>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity1} className='w-fit mx-auto'/>
@@ -125,7 +126,7 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
+                <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
@@ -144,7 +145,7 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
+                <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
@@ -163,7 +164,7 @@ const Home = () => {
               </div>
 
               <div className='mt-[30px]'>
-                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
+                <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
@@ -182,17 +183,18 @@ const Home = () => {
               </div>
 
               <div className="mt-[30px]">
-                <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
+                <h2 className='text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px] leading-6'>
                   สินค้าลดราคา
                   <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
-                  <BlogCard image={bannerDiscount1} title="รวมคูปองและโค๊ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
-                  <BlogCard image={bannerDiscount2} title="รวมคูปองและโค๊ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
+                  <BlogCard image={bannerDiscount1} title="รวมคูปองและโค้ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
+                  <BlogCard image={bannerDiscount2} title="รวมคูปองและโค้ดส่วนลดประจำเดือนสิงหาคม 2023" date="12 ธ.ค. 2023" />
                 </div>
               </div>
             </main>
+            <FooterMenu active={0}/>
         </>
     )
 }

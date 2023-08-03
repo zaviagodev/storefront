@@ -30,3 +30,7 @@
 .inter {
   font-family:'Inter', sans-serif
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -17,13 +17,13 @@ const ProductCard = ({
             <div className="rounded-md hover:shadow-lg min-w-[150px] max-w-[150px]">
                 <div className="relative">
                     <SfLink href="#" className="block">
-                        <img
-                            src={thumbnail}
-                            alt={title}
-                            className="object-cover h-auto rounded-md aspect-square"
-                            width="300"
-                            height="300"
-                        />
+                      <img
+                        src={thumbnail}
+                        alt={title}
+                        className="object-cover h-auto rounded-md aspect-square"
+                        width="300"
+                        height="300"
+                      />
                     </SfLink>
                     {/* <SfButton
                         type="button"
@@ -37,8 +37,8 @@ const ProductCard = ({
                     </SfButton> */}
                 </div>
                 <div className="py-4">
-                    <SfLink href="#" variant="secondary" className="no-underline text-[#1C1C1C] text-xs">
-                        {title}
+                    <SfLink href="#" variant="secondary" className="no-underline text-[#111111] text-xs">
+                      {title}
                     </SfLink>
                     {/* <div className="flex items-center pt-1">
                         <SfRating size="xs" value={5} max={5} />
@@ -50,7 +50,10 @@ const ProductCard = ({
                     {/* <p className="block py-2 font-normal typography-text-sm text-neutral-700">
                         Lightweight • Non slip • Flexible outsole • Easy to wear on and off
                     </p> */}
-                    <span className="block pb-2 font-bold text-sm text-[#D10000]">{price}</span>
+                    <div className='flex items-center gap-x-[2px]'>
+                      <span className="block pb-2 font-medium text-sm text-[#D10000]">{price}</span>
+                      <span className="block pb-2 font-medium text-[10px] text-[#8A8A8A] line-through">฿ 30</span>
+                    </div>
                     {/* <SfButton type="button" size="sm" slotPrefix={<SfIconShoppingCart size="sm" />} onClick={(e) => {
                         e.preventDefault();
                         addToCart(itemCode)

@@ -7,7 +7,7 @@ const BlogCard = ({title, image, date, link}) => {
       <img src={image} />
       <h2 className='mt-4 whitespace-normal text-[#1C1C1C] text-sm font-bold'>{title}</h2>
 
-      <p className='text-[#2E3A59] mt-[10px] text-xs flex items-center'>
+      <p className='text-[#8A8A8A] mt-[10px] text-xs flex items-center'>
         <SfIconCalendarToday className="w-[11px] mr-[6px]"/>
         หมดเขต {date}
       </p>

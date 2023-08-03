@@ -25,6 +25,7 @@ import {
     LogOut02
 } from '@untitled-ui/icons-react'
 import { useFrappeAuth, useFrappeGetDoc } from 'frappe-react-sdk';
+import FooterMenu from '../components/FooterMenu'
 
 const MyAccount = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
@@ -260,6 +261,7 @@ const MyAccount = () => {
           )}
         </div>
       </main>
+      <FooterMenu active={3} />
     </div>
   )
 }
