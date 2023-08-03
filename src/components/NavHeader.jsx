@@ -50,7 +50,7 @@ const NavHeader = () => {
                     <img
                       src={brandLogo}
                       alt="Sf Logo"
-                      className="w-30"
+                      className="w-[100px]"
                     />
                   </picture>
                 </a>
