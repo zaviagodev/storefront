@@ -13,7 +13,7 @@ const MyID = () => {
 
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
+      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
         <Link to="/my-account">
           <ArrowLeft />
         </Link>

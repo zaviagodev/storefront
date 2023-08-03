@@ -8,7 +8,7 @@ const AddShippingAddress = () => {
   const [modified, setModified] = useState(true);
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
+      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
         <Link to="/shipping-address">
           <ArrowLeft />
         </Link>
