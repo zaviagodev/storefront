@@ -8,7 +8,7 @@ const Signup = () => {
   const [getOTP, setGetOTP] = useState(false);
   const [filledPhone, setFilledPhone] = useState(false);
   const [filledOTP, setFilledOTP] = useState(true);
-  const [filledAllOtp, setFilledAllOtp] = useState(false);
+  const [filledAllOtp, setFilledAllOtp] = useState('')
   const [phoneError, setPhoneError] = useState(false);
   const [otperror, setOtperror] = useState(false)
 
@@ -92,63 +92,34 @@ const Signup = () => {
             <div className="flex gap-x-[9px] mt-9">
               <input type="text" maxLength="1" id="num1" ref={num1Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false);
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }}/>
               <input type="text" maxLength="1" id="num2" ref={num2Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false);
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }} />
               <input type="text" maxLength="1" id="num3" ref={num3Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }} />
               <input type="text" maxLength="1" id="num4" ref={num4Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }} />
               <input type="text" maxLength="1" id="num5" ref={num5Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }} />
               <input type="text" maxLength="1" id="num6" ref={num6Ref} className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" onKeyDown={() => {
                 setOtperror(false)
-                if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" || num5Ref.current.value !== "" || num6Ref.current.value !== ""){
-                  setFilledAllOtp(true)
-                } else {
-                  setFilledAllOtp(false)
-                }
               }} />
             </div>
 
             {!otperror ? (<p className="text-center mt-[43px]">I didn't receive a code <strong>Resend</strong></p>) : (<p className="text-center text-[#EC5454] inter mt-[43px]">Wrong code, please try again <strong>Resend</strong></p>)}
 
-            <Link to={!filledAllOtp ? "" : "/fill-info"} onClick={() => {
+            <button onClick={() => {
               if (num1Ref.current.value != "" && num2Ref.current.value != "" && num3Ref.current.value != "" && num4Ref.current.value != "" && num5Ref.current.value != "" && num6Ref.current.value != ""){
-                setOtperror(false)
+                setOtperror(false);
+                location.href = "/fill-info"
               } else {
                 setOtperror(true)
               }
-            }} className={`block mt-10 w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</Link>
+            }} className={`block mt-10 w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</button>
           </main>
         </>
       )}
