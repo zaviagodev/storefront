@@ -6,24 +6,27 @@ import germanflag from '../../img/german-flag.svg'
 import { ArrowLeft, MarkerPin01 } from '@untitled-ui/icons-react'
 
 const Signup = () => {
+  const [phonePage, setPhonePage] = useState(true);
   const [getOTP, setGetOTP] = useState(false);
   const [filledPhone, setFilledPhone] = useState(true);
   const [filledOTP, setFilledOTP] = useState(true);
-  const [phoneError, setPhoneError] = useState(true);
+  const [phoneError, setPhoneError] = useState(false);
   const [otperror, setOtperror] = useState(false)
 
   const goBack = () => {
     setGetOTP(false);
+    setPhonePage(true);
     setFilledPhone(false);
   }
 
   const goNext = () => {
+    setPhonePage(false)
     setGetOTP(true);
   }
 
   return (
     <>
-      {!getOTP ? (
+      {phonePage && (
         <>
           <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
             <img src={logo} />
@@ -58,7 +61,9 @@ const Signup = () => {
             <p className="text-[#9E9E9E] mt-[14px] text-[13px]">หน้าเพจนี้อันรวมไปถึงเอกสารหรือข้อความต่างๆที่มีความเกี่ยวข้องกับหน้าเพจนี้ถูกเขียนขึ้นมาเพื่อแจ้งท่านให้ทราบถึง ข้อกำหนด</p>
           </main>
         </>
-      ) : (
+      )}
+      
+      {getOTP && (
         <>
           <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px]'>
             <button onClick={goBack}>
