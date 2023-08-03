@@ -36,11 +36,11 @@ const Home = () => {
         <>
           <NavHeader />
             <img src={banner} className='w-full left-0 max-h-[240px] object-cover'/>
-            <header className='m-3 bg-white relative pl-5 py-1 m-auto rounded-[6px] top-[-80px] flex' style={{filter:"drop-shadow(0 4px 20px #00000040)",width:"calc(100% - 40px)"}}>
+            <header className='m-3 bg-white relative pl-5 py-1 m-auto rounded-[6px] top-[-30px] flex' style={{filter:"drop-shadow(0 4px 20px #6363630D)",width:"calc(100% - 40px)"}}>
               <div className='w-[80%] py-2'>
                 <div className='flex'>
                   <div className='basis-1/3 flex gap-x-1 text-[13px]'>
-                    <span>฿ </span>
+                    <span className='text-[#1BB040]'>฿ </span>
                     850
                   </div>
                   <div className='basis-1/3 flex gap-x-1 text-[13px]'>
@@ -74,7 +74,7 @@ const Home = () => {
                 </div>
               </div>
             </header>
-            <main className='relative top-[-40px] pb-3'>
+            <main className='relative top-[-10px] pb-3'>
               <div className='flex gap-2 px-5'>
                 <picture className='basis-1/4 flex flex-col justify-start text-center'>
                   <img src={activity1} className='w-fit mx-auto'/>
@@ -127,7 +127,7 @@ const Home = () => {
               <div className='mt-[30px]'>
                 <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
+                  <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
@@ -146,7 +146,7 @@ const Home = () => {
               <div className='mt-[30px]'>
                 <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
+                  <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
@@ -165,7 +165,7 @@ const Home = () => {
               <div className='mt-[30px]'>
                 <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
+                  <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
@@ -184,7 +184,7 @@ const Home = () => {
               <div className="mt-[30px]">
                 <h2 className='mb-[5px] text-[#3D3D3D] font-bold flex items-center px-5 mb-[14px]'>
                   สินค้าลดราคา
-                  <SfIconArrowForward className="w-[16px] text-[#7A7A7A] ml-2"/>
+                  <SfIconArrowForward className="w-[18px] text-black ml-2"/>
                 </h2>
 
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">

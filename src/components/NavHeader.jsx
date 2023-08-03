@@ -13,6 +13,7 @@ import banner from '../img/banner.png'
 import { useFrappeAuth } from 'frappe-react-sdk';
 import { useCart } from '../hooks/useCart';
 import { useNavigate } from 'react-router-dom';
+import { ShoppingBag01, MessageCircle01  } from '@untitled-ui/icons-react'; 
 
 const NavHeader = () => {
     const navigate = useNavigate();
@@ -21,14 +22,14 @@ const NavHeader = () => {
 
     const actionItems = [
       {
-        icon: (<img src={messageIcon}/>),
+        icon: (<MessageCircle01 />),
         label: '',
         ariaLabel: 'Message',
         role: 'button',
         onClick: () => setIsOpen(true)
       },
       {
-        icon: (<img src={cartIcon}/>),
+        icon: (<ShoppingBag01 />),
         label: '',
         ariaLabel: 'Cart',
         role: 'button',
@@ -37,7 +38,7 @@ const NavHeader = () => {
     ];
 
     return (
-        <header className="flex justify-center w-full z-[999] fixed top-0">
+        <header className="flex justify-center w-full z-[999] absolute top-0">
             <div className="flex flex-wrap lg:flex-nowrap items-center flex-row justify-start h-full max-w-[1536px] w-full bg-[#FFFFFF94] py-2 px-4 mx-5 my-3 rounded-[9px]">
                 <a
                   href="/"
@@ -49,7 +50,7 @@ const NavHeader = () => {
                     <img
                       src={brandLogo}
                       alt="Sf Logo"
-                    //   className="w-8 h-8 md:h-6 lg:h-[1.75rem]"
+                      className="w-30"
                     />
                   </picture>
                 </a>
@@ -59,7 +60,7 @@ const NavHeader = () => {
                         {actionItems.map((actionItem) => (
                             <SfButton
                               key={actionItem.ariaLabel}
-                              className="relative ml-2 rounded-[99px] hover:bg-white"
+                              className="relative ml-1 rounded-[99px] hover:bg-white"
                               aria-label={actionItem.ariaLabel}
                               variant="tertiary"
                               square
