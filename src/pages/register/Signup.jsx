@@ -46,9 +46,11 @@ const Signup = () => {
             <div className="flex gap-x-3">
               <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px]'>
                 <option value="thailand">
+                  🇹🇭
                   +66
                 </option>
                 <option value="germany">
+                  🇩🇪
                   +49
                 </option>
               </select>
