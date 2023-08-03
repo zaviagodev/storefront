@@ -44,33 +44,13 @@ const Signup = () => {
             <p className='mt-4'>กรอกเบอร์มือถือของคุณและกดรับรหัสยืนยันทาง SMS (OTP) เพื่อยืนยันเบอร์มือถือของคุณ</p>
 
             <div className="flex gap-x-3">
-              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 mt-[11px] w-[30%]'>
-                <option value="thailand">
-                  +66
-                </option>
-                <option value="china">
-                  +86
-                </option>
-                <option value="uk">
-                  +44
-                </option>
-                <option value="usa">
-                  +1
-                </option>
-                <option value="germany">
-                  +49
-                </option>
-              </select>
-
-              <div className="relative">
-                <input type="tel" id="phone" autoComplete="off" ref={telRef} className={`relative border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 px-3 mt-[11px] w-full`} onInput={(e) => {
-                  if (e.target.value !== ""){
-                    setFilledPhone(true)
-                  } else {
-                    setFilledPhone(false)
-                  }
-                }} onKeyDown={() => setPhoneError(false)}/>
-              </div>
+              <input type="tel" id="phone" autoComplete="off" ref={telRef} className={`relative border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 px-3 mt-[11px] w-full`} onInput={(e) => {
+                if (e.target.value !== ""){
+                  setFilledPhone(true)
+                } else {
+                  setFilledPhone(false)
+                }
+              }} onKeyDown={() => setPhoneError(false)}/>
             </div>
 
             {!phoneError ? "" : (<p className="text-[#EC5454] inter mt-2">This phone number is invalid</p>)}
