@@ -9,22 +9,8 @@ const Signup = () => {
   const [getOTP, setGetOTP] = useState(false);
   const [filledPhone, setFilledPhone] = useState(true);
   const [filledOTP, setFilledOTP] = useState(true);
-
-  const telRef = useRef(null);
-
-  const num1Ref = useRef(null);
-  const num2Ref = useRef(null);
-  const num3Ref = useRef(null);
-  const num4Ref = useRef(null);
-  const num5Ref = useRef(null);
-
-  const checkIfFilledPhone = () => {
-    if (telRef.current.value.length >= 9){
-      setFilledPhone(true);
-    } else {
-      setFilledPhone(false);
-    }
-  }
+  const [phoneError, setPhoneError] = useState(true);
+  const [otperror, setOtperror] = useState(false)
 
   const goBack = () => {
     setGetOTP(false);
@@ -35,14 +21,6 @@ const Signup = () => {
     setGetOTP(true);
   }
 
-  const acceptOTP = () => {
-    if (num1Ref.current.value !== "" && num2Ref.current.value !== "" && num3Ref.current.value !== "" && num4Ref.current.value !== "" && num5Ref.current.value !== ""){
-      setFilledOTP(true)
-    } else {
-      setFilledOTP(false)
-    }
-  }
-
   return (
     <>
       {!getOTP ? (
@@ -51,7 +29,7 @@ const Signup = () => {
             <img src={logo} />
           </header>
           <main className='px-5 py-[46px]'>
-            <h1 className='text-[22px]'>กรอกเบอร์มือถือของคุณ</h1>
+            <h1 className='text-[22px] font-bold'>กรอกเบอร์มือถือของคุณ</h1>
             <p className='mt-4'>กรอกเบอร์มือถือของคุณและกดรับรหัสยืนยันทาง SMS (OTP) เพื่อยืนยันเบอร์มือถือของคุณ</p>
 
             <div className="flex gap-x-3">
@@ -64,8 +42,16 @@ const Signup = () => {
                 </option>
               </select>
 
-              <input type="tel" className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full' ref={telRef} onInput={checkIfFilledPhone}/>
+              <input type="tel" id="phone" className={`border ${phoneError ? "border-[#EC5454]" : "border-[#E3E3E3]"} rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] w-full`} onInput={(e) => {
+                if (e.target.value !== ""){
+                  setFilledPhone(true)
+                } else {
+                  setFilledPhone(false)
+                }
+              }}/>
             </div>
+
+            {!phoneError ? "" : (<p className="text-[#EC5454] inter mt-2">This phone number is invalid</p>)}
 
             <button onClick={goNext} className={`mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledPhone ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledPhone}>รับรหัสยืนยัน SMS (OTP)</button>
 
@@ -85,16 +71,17 @@ const Signup = () => {
             <p className='mt-4'>เราได้ส่ง SMS (OTP) ไปที่เบอร์<br/>090-1234-567</p>
 
             <div className="flex gap-x-[9px] mt-9">
-              <input type="number" id="num1" className="border border-[#D8DADC] basis-[20%] w-[20%] p-3 text-center text-2xl rounded-[15px]" />
-              <input type="number" id="num2" className="border border-[#D8DADC] basis-[20%] w-[20%] p-3 text-center text-2xl rounded-[15px]" />
-              <input type="number" id="num3" className="border border-[#D8DADC] basis-[20%] w-[20%] p-3 text-center text-2xl rounded-[15px]" />
-              <input type="number" id="num4" className="border border-[#D8DADC] basis-[20%] w-[20%] p-3 text-center text-2xl rounded-[15px]" />
-              <input type="number" id="num5" className="border border-[#D8DADC] basis-[20%] w-[20%] p-3 text-center text-2xl rounded-[15px]" />
+              <input type="text" maxLength="1" id="num1" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off"/>
+              <input type="text" maxLength="1" id="num2" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" />
+              <input type="text" maxLength="1" id="num3" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" />
+              <input type="text" maxLength="1" id="num4" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" />
+              <input type="text" maxLength="1" id="num5" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" />
+              <input type="text" maxLength="1" id="num6" className={`border ${otperror ? "border-[#EC5454]" : "border-[#D8DADC]"} w-[16.67%] p-3 text-center text-2xl rounded-[15px]`} autoComplete="off" />
             </div>
 
-            <p className="text-center mt-[43px]">I didn't receive a code <strong>Resend</strong></p>
+            {!otperror ? (<p className="text-center mt-[43px]">I didn't receive a code <strong>Resend</strong></p>) : (<p className="text-center text-[#EC5454] inter mt-[43px]">Wrong code, please try again <strong>Resend</strong></p>)}
 
-            <Link to="/fill-info" className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</Link>
+            <Link to="/fill-info" className={`block mt-10 w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!filledOTP ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!filledOTP}>ยืนยันรหัส OTP</Link>
           </main>
         </>
       )}

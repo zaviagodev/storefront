@@ -16,6 +16,7 @@ import BankInfoPage from "./pages/BankInfoPage";
 import MyAccount from "./pages/MyAccount";
 import ShippingAddress from "./pages/address/ShippingAddress";
 import AddShippingAddress from "./pages/address/ShippingAddressAdd";
+import EditShippingAddress from "./pages/address/ShippingAddressEdit";
 import Welcome from "./pages/register/Welcome";
 import Signup from "./pages/register/Signup";
 import FillInfo from "./pages/register/FillInfo";
@@ -55,6 +56,7 @@ function App() {
               <Route path="/success" element={<Success />}/>
               <Route path="/shipping-address" element={<ShippingAddress />}/>
               <Route path="/shipping-address/add" element={<AddShippingAddress />}/>
+              <Route path="/shipping-address/edit" element={<EditShippingAddress />}/>
             </Routes>
             <Cart />
           </CartProvider>

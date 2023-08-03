@@ -8,7 +8,7 @@ const ShippingAddress = () => {
         <div className='flex justify-between'>
           {name}
           <div className='flex gap-x-4'>
-            <button>แก้ไข</button>
+            <Link to="/shipping-address/edit">แก้ไข</Link>
             <button>ลบ</button>
           </div>
         </div>

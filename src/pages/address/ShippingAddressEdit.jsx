@@ -3,8 +3,8 @@ import { ArrowLeft, MarkerPin01 } from '@untitled-ui/icons-react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 
-const AddShippingAddress = () => {
-  const [province, setProvince] = useState([]);
+const EditShippingAddress = () => {
+  const [province, setProvince] = useState('');
   const [modified, setModified] = useState(true);
   return (
     <>
@@ -12,7 +12,7 @@ const AddShippingAddress = () => {
         <Link to="/shipping-address">
           <ArrowLeft />
         </Link>
-        ใส่ที่อยู่การจัดส่ง
+        แก้ไขที่อยู่การจัดส่ง
       </header>
       <main className='p-5 pb-[100px]'>
         <form action="#" className='flex flex-col gap-y-5'>
@@ -40,7 +40,7 @@ const AddShippingAddress = () => {
               <option value='ปทุมธานี'>ปทุมธานี</option>
             </select>
           </div>
-          
+
           <div className='flex flex-col'>
             <label htmlFor='district'>เมือง / เขต</label>
             <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px]' id='district' name='district'>
@@ -70,4 +70,4 @@ const AddShippingAddress = () => {
   )
 }
 
-export default AddShippingAddress
+export default EditShippingAddress
