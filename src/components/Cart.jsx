@@ -130,13 +130,13 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6 absolute bottom-0 w-full">
+                    <div className="border-t border-gray-200 px-4 py-6 absolute bottom-0 w-full">
+                        <h2>รายละเอียดการชำระเงิน</h2>
                         <div className="flex justify-between text-base font-medium text-gray-900">
-                            <p>Subtotal</p>
+                            <p>ยอดรวม</p>
                             <p>฿ {getTotal()}</p>
                         </div>
-                        <p className="my-1 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <SfButton className="w-full" style={{backgroundColor:cartCount == 0 ? "#C5C5C5" : "black",color:"white"}} disabled={cartCount == 0} onClick={() => { setIsOpen(false); navigate("/checkout"); }}>
+                        <SfButton className="w-full mt-[22px]" style={{backgroundColor:cartCount == 0 ? "#C5C5C5" : "black",color:"white"}} disabled={cartCount == 0} onClick={() => { setIsOpen(false); navigate("/checkout"); }}>
                             ดำเนินการสั่งซื้อสินค้า
                         </SfButton>
                     </div>
