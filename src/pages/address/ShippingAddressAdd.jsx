@@ -2,10 +2,13 @@ import { ArrowLeft, MarkerPin01, AlertTriangle, FileCheck02 } from '@untitled-ui
 import { Link } from 'react-router-dom'
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import chevronDropdown from '../../img/chevron-right.svg'
 
 const AddShippingAddress = () => {
   const [province, setProvince] = useState([]);
   const [modified, setModified] = useState(true);
+
+  const provinceRef = useRef([])
 
   const [openSuccess, setOpenSuccess] = useState(false)
   return (
@@ -35,22 +38,49 @@ const AddShippingAddress = () => {
 
           <div className='flex flex-col'>
             <label htmlFor='province'>จังหวัด</label>
-            <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px]' id='province' name='province'>
+            <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' onChange={() => console.log(provinceRef.current.value)} ref={provinceRef} id='province' name='province' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
               <option value='กรุงเทพมหานคร'>กรุงเทพมหานคร</option>
               <option value='สมุทรปราการ'>สมุทรปราการ</option>
               <option value='สมุทรสาคร'>สมุทรสาคร</option>
               <option value='ปทุมธานี'>ปทุมธานี</option>
             </select>
           </div>
-          
+
           <div className='flex flex-col'>
             <label htmlFor='district'>เมือง / เขต</label>
-            <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px]' id='district' name='district'>
+            {/* <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='district' name='district' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
               <option value='สวนหลวง'>สวนหลวง</option>
               <option value='บางกะปิ'>บางกะปิ</option>
               <option value='บางนา'>บางนา</option>
               <option value='ห้วยขวาง'>ห้วยขวาง</option>
-            </select>
+            </select> */}
+            {provinceRef.current.value === "กรุงเทพมหานคร" ? (
+              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='district' name='district' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
+                <option value='สวนหลวง'>สวนหลวง</option>
+                <option value='บางกะปิ'>บางกะปิ</option>
+                <option value='บางนา'>บางนา</option>
+                <option value='ห้วยขวาง'>ห้วยขวาง</option>
+              </select>
+            ) : provinceRef.current.value === "สมุทรปราการ" ? (
+              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='district' name='district' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
+                <option value='บางพลี'>บางพลี</option>
+                <option value='พระประแดง'>พระประแดง</option>
+                <option value='บางเสาธง'>บางเสาธง</option>
+                <option value='พระสมุทรเจดีย์'>พระสมุทรเจดีย์</option>
+                <option value='เมือง'>เมือง</option>
+                <option value='บางบ่อ'>บางบ่อ</option>
+              </select>
+            ) : (
+              <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='district' name='district' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
+                <option value='บางพลี'>ลำลูกกา</option>
+                <option value='ธัญบุรี'>ธัญบุรี</option>
+                <option value='คลองหลวง'>คลองหลวง</option>
+                <option value='ลาดหลุมแก้ว'>ลาดหลุมแก้ว</option>
+                <option value='เมือง'>เมือง</option>
+                <option value='สามโคก'>สามโคก</option>
+                <option value='หนองเสือ'>หนองเสือ</option>
+              </select>
+            )}
           </div>
 
           <div className='flex flex-col'>

@@ -34,3 +34,26 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+.accordion-arrow-anim {
+  transform:rotate(0deg);
+  transition:all 200ms;
+}
+
+.accordion-arrow-anim.active {
+  transform:rotate(90deg);
+  transition:all 200ms;
+}
+
+.border-anim {
+  animation:borderAnim 300ms;
+}
+
+@keyframes borderAnim {
+  from {
+    width:0;
+  }
+  to {
+    width:100%
+  }
+}

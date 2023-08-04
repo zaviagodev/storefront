@@ -25,7 +25,7 @@ const ProductCard = ({
                         height="300"
                       />
                     </SfLink>
-                    {/* <SfButton
+                    <SfButton
                         type="button"
                         variant="tertiary"
                         size="sm"
@@ -34,7 +34,7 @@ const ProductCard = ({
                         aria-label="Add to wishlist"
                     >
                         <SfIconFavorite size="sm" />
-                    </SfButton> */}
+                    </SfButton>
                 </div>
                 <div className="py-4">
                     <SfLink href="#" variant="secondary" className="no-underline text-[#111111] text-xs">
