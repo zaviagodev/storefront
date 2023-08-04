@@ -29,7 +29,7 @@ const NavHeader = () => {
         onClick: () => setIsOpen(true)
       },
       {
-        icon: (<ShoppingBag01 />),
+        icon: (<ShoppingBag01 viewBox='0 0 24 24' width="22" height="22"/>),
         label: '',
         ariaLabel: 'Cart',
         role: 'button',
