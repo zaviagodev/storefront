@@ -19,27 +19,29 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
 import { useCart } from '../hooks/useCart';
-import { ArrowLeft, ShoppingBag01, Heart } from '@untitled-ui/icons-react';
+import { ArrowLeft, ShoppingBag01, Heart, CoinsStacked01, Truck01, AnnotationDots, Share04, SwitchHorizontal01 } from '@untitled-ui/icons-react';
 import Accordion from '../components/Accordion';
 import ProductCard from '../components/ProductCard';
 
 const Product = () => {
     const { id } = useParams();
-    const { get } = useProducts();
-    const { cart, addToCart } = useCart();
+    const { get, products } = useProducts();
+    const { cart, addToCart, cartCount, setIsOpen } = useCart();
     const product = get(id);
     const inputId = "useId('input')";
     const min = 1;
     const max = 999;
     const [value, { inc, dec, set }] = useCounter(min);
+    const [colour, setColour] = useState("ส้ม")
 
-    const { products } = useProducts()
+    const [liked, setLiked] = useState(false)
 
     const items = [
       {
         title: "ตารางขนาด",
-        content: (<>
-          <div className="flex">
+        content: (
+        <>
+          {/* <div className="flex">
             <SfIconPackage size="sm" className="flex-shrink-0 mr-1 text-neutral-500" />
             <p className="text-sm">
               Free shipping, arrives by Thu, Apr 7. Want it faster?
@@ -66,15 +68,72 @@ const Product = () => {
                 Details
               </SfLink>
             </p>
+          </div> */}
+          <div className='flex mb-9'>
+            <button className='text-xs text-[#5B6CFF] w-1/3 text-center flex justify-center gap-x-[6px] items-center'>
+              <AnnotationDots viewBox='0 0 24 24' width="18" height="18"/>
+              ติดต่อเรา
+            </button>
+            <button className='text-xs text-[#5B6CFF] w-1/3 text-center flex justify-center gap-x-[6px] items-center'>
+              <Share04 viewBox='0 0 24 24' width="18" height="18"/>
+              แชร์สินค้า
+            </button>
+            <button className='text-xs text-[#5B6CFF] w-1/3 text-center flex justify-center gap-x-[6px] items-center'>
+              <SwitchHorizontal01 viewBox='0 0 24 24' width="18" height="18"/>
+              เปรียบเทียบสินค้า
+            </button>
           </div>
-        </>)
+          <div className="flex mt-4">
+            <CoinsStacked01 />
+            <div className='block ml-3'>
+              <h3 className="text-sm">Perks</h3>
+              <p className="text-xs text-[#8A8A8A]">
+                รับ Cashback & สิทธิพิเศษอีกมากมาย
+              </p>
+              <SfLink href="#" variant="secondary" className="text-[#5B6CFF] text-xs" style={{textDecoration:"none"}}>
+                ต้องทำอย่างไร
+              </SfLink>
+            </div>
+          </div>
+          <div className="flex mt-4">
+            <Truck01 />
+            <div className='block ml-3'>
+              <h3 className="text-sm">ส่งฟรีเมื่อซื้อสินค้าครบ 990 บาท</h3>
+              <p className="text-xs text-[#8A8A8A]">
+                รอรับสินค้าได้เลย
+              </p>
+            </div>
+          </div>
+        </>
+        )
       },
       {
-        title: "Test Number Two",
+        title: "วัสดุ",
+        content: "Test"
+      },
+      {
+        title: "คะแนนสินค้า",
         content: (
           <>
-            <h2>WHAT?!</h2>
-            <p>วัสดุ</p>
+            <div className="flex items-center space-x-1">
+              <svg className="w-4 h-4 text-[#FFB800]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+              </svg>
+              <svg className="w-4 h-4 text-[#FFB800]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+              </svg>
+              <svg className="w-4 h-4 text-[#FFB800]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+              </svg>
+              <svg className="w-4 h-4 text-[#FFB800]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+              </svg>
+              <svg className="w-4 h-4 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+              </svg>
+            </div>
+
+            <p className='text-[#5B6CFF]'>4.8/5.0</p>
           </>
         )
       }
@@ -89,7 +148,7 @@ const Product = () => {
           <Link to="/" className='p-[9px] rounded-[99px] bg-[#FFFFFF94]' style={{backdropFilter:"blur(6px)"}}>
             <ArrowLeft />
           </Link>
-          <button className='p-[9px] rounded-[99px] bg-[#FFFFFF94]' style={{backdropFilter:"blur(6px)"}}>
+          <button className='p-[9px] rounded-[99px] bg-[#FFFFFF94]' style={{backdropFilter:"blur(6px)"}} onClick={() => setIsOpen(true)}>
             <ShoppingBag01 />
           </button>
         </nav>
@@ -123,6 +182,16 @@ const Product = () => {
                 </h1>
                 <strong className="block font-bold typography-headline-3 inter">{product?.formatted_price}</strong>
               </div>
+              <p className='text-[#625C5C] text-sm inter'>Women’s Pullover Training Hoodie</p>
+
+              <div className='mt-6 mb-3'>
+                <p>สี: {colour}</p>
+
+                <div className='flex mt-3 gap-x-[10px]'>
+                  <div className={`w-6 h-6 bg-[#F54E06] rounded-[99px] border-[2px] border-white ${colour === "ส้ม" ? "outline outline-black" : "outline outline-white"}`} onClick={() => setColour("ส้ม")}></div>
+                  <div className={`w-6 h-6 bg-black rounded-[99px] border-[2px] border-white ${colour === "ดำ" ? "outline outline-black" : "outline outline-white"}`} onClick={() => setColour("ดำ")}></div>
+                </div>
+              </div>
                 <div dangerouslySetInnerHTML={{ __html: product?.short_description }} />
                 <div className='pt-2'>
                     {
@@ -145,7 +214,7 @@ const Product = () => {
                             aria-label="Add to wishlist"
                         >
                             {/* <SfIconFavorite size="sm" color='black'/> */}
-                            <Heart color="black" fill="red"/>
+                            <Heart color={liked ? "red" : "black"} />
                         </SfButton>
                       {/* <div className="flex flex-col items-stretch xs:items-center xs:inline-flex ml-4">
                         

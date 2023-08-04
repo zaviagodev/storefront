@@ -35,18 +35,31 @@
   display: none;
 }
 
-.accordion-arrow-anim {
+.accordion-btn .accordion-arrow-anim {
   transform:rotate(0deg);
   transition:all 200ms;
 }
 
-.accordion-arrow-anim.active {
+.accordion-btn.active .accordion-arrow-anim {
   transform:rotate(90deg);
   transition:all 200ms;
 }
 
 .border-anim {
   animation:borderAnim 300ms;
+}
+
+.accordion-btn + .accordion-detail {
+  visibility:hidden;
+  opacity:0;
+  max-height:0;
+  transition:visibility 200ms, opacity 200ms, max-height 300ms;
+}
+
+.accordion-btn.active + .accordion-detail {
+  visibility:visible;
+  opacity:1;
+  transition:visibility 200ms, opacity 200ms, max-height 300ms;
 }
 
 @keyframes borderAnim {
