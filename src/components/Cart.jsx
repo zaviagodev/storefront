@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import { useCart } from '../hooks/useCart'
 import { useProducts } from '../hooks/useProducts'
 import { useNavigate } from 'react-router-dom'
+import { ArrowLeft } from '@untitled-ui/icons-react';
 
 import { useRef } from 'react';
 
@@ -13,7 +14,6 @@ const Cart = () => {
     const drawerRef = useRef(null);
     const { getByItemCode } = useProducts()
     const navigate = useNavigate()
-
 
     useTrapFocus(drawerRef, { activeState: isOpen });
 
@@ -38,19 +38,24 @@ const Cart = () => {
                 onClose={() => setIsOpen(false)}
                 className="bg-neutral-50 border border-gray-300 w-full z-[999]"
             >
+                <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+                  <button onClick={() => setIsOpen(false)} type="button">
+                    <span className="sr-only">Close panel</span>
+                    <ArrowLeft />
+                  </button>
+                  ทั้งหมด ฿ {getTotal()}
+                </header>
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                     <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
-                        <div className="flex items-start justify-between">
-                            <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
+                        {/* <div className="flex items-start justify-between">
                             <div className="ml-3 flex h-7 items-center">
                                 <button onClick={() => setIsOpen(false)} type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
                                     <span className="sr-only">Close panel</span>
-                                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    <ArrowLeft />
                                 </button>
                             </div>
-                        </div>
+                            <h2 className="text-lg font-medium text-gray-900" id="slide-over-title">ทั้งหมด ฿ {getTotal()}</h2>
+                        </div> */}
 
                         <div className="mt-8">
                             <div className="flow-root">
@@ -59,7 +64,7 @@ const Cart = () => {
                                         Object.entries(cart).map(([itemCode, qty]) => {
                                             const product = getByItemCode(itemCode)
                                             return (
-                                                <li key={itemCode} className="flex py-6">
+                                                <li key={itemCode} className="flex pb-6">
                                                     <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                                         <img src={product?.website_image} alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." className="h-full w-full object-cover object-center" />
                                                     </div>
@@ -125,14 +130,14 @@ const Cart = () => {
                         </div>
                     </div>
 
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6 absolute bottom-0 w-full">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                             <p>Subtotal</p>
                             <p>฿ {getTotal()}</p>
                         </div>
                         <p className="my-1 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <SfButton className="w-full" disabled={cartCount == 0} onClick={() => { setIsOpen(false); navigate("/checkout"); }}>
-                            Checkout
+                        <SfButton className="w-full" style={{backgroundColor:cartCount == 0 ? "#C5C5C5" : "black",color:"white"}} disabled={cartCount == 0} onClick={() => { setIsOpen(false); navigate("/checkout"); }}>
+                            ดำเนินการสั่งซื้อสินค้า
                         </SfButton>
                     </div>
                 </div>
