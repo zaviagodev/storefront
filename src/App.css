@@ -62,6 +62,10 @@
   transition:visibility 200ms, opacity 200ms, max-height 300ms;
 }
 
+.container-admin {
+  margin-left:280px;
+}
+
 @keyframes borderAnim {
   from {
     width:0;

@@ -23,6 +23,11 @@ import FillInfo from "./pages/register/FillInfo";
 import Success from "./pages/register/Success";
 import MyCoupon from "./pages/MyCoupon";
 import MyID from "./pages/MyID";
+import ProductCompare from "./pages/ProductCompare";
+
+import BlogAdmin from "./pages/admin/BlogAdmin";
+import BlogCategories from "./pages/admin/BlogCategories";
+import BlogAdd from "./pages/admin/BlogAdd";
 
 function App() {
   const navigate = useNavigate();
@@ -47,6 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="products/:id" element={<Product />} />
+              <Route path="product-compare/:id" element={<ProductCompare />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/thankyou" element={<BankInfoPage />} />
               <Route path="/profile" element={<Profile />} />
@@ -61,6 +67,10 @@ function App() {
               <Route path="/shipping-address" element={<ShippingAddress />}/>
               <Route path="/shipping-address/add" element={<AddShippingAddress />}/>
               <Route path="/shipping-address/edit" element={<EditShippingAddress />}/>
+
+              <Route path="/blog-admin" element={<BlogAdmin />}/>
+              <Route path="/blog-categories" element={<BlogCategories />} />
+              <Route path="/blog-add" element={<BlogAdd />} />
             </Routes>
             <Cart />
           </CartProvider>

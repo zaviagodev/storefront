@@ -2,6 +2,7 @@ import { ArrowLeft, MarkerPin01, AlertTriangle } from '@untitled-ui/icons-react'
 import { Link } from 'react-router-dom'
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import TitleHeader from '../components/TitleHeader'
 
 const MyCoupon = () => {
   const [canUseCoupon, setCanUseCoupon] = useState(true)
@@ -43,12 +44,7 @@ const MyCoupon = () => {
   }
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
-        <Link to="/my-account">
-          <ArrowLeft />
-        </Link>
-        คูปองของฉัน
-      </header>
+      <TitleHeader title="คูปองของฉัน" link="/my-account" />
       <main className='p-5'>
         <div className='block w-[90%] m-auto'>
           <button className='my-2 w-1/2' onClick={switchToCanUseCoupon}>

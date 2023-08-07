@@ -2,6 +2,7 @@ import { ArrowLeft, MarkerPin01, AlertTriangle, FileCheck02 } from '@untitled-ui
 import { Link } from 'react-router-dom'
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import TitleHeader from '../../components/TitleHeader'
 
 const EditShippingAddress = () => {
   const [province, setProvince] = useState('');
@@ -10,12 +11,7 @@ const EditShippingAddress = () => {
   const [openSuccess, setOpenSuccess] = useState(false)
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
-        <Link to="/shipping-address">
-          <ArrowLeft />
-        </Link>
-        แก้ไขที่อยู่การจัดส่ง
-      </header>
+      <TitleHeader title="แก้ไขที่อยู่การจัดส่ง" link="/shipping-address" />
       <main className='p-5 pb-[100px]'>
         <form action="#" className='flex flex-col gap-y-5'>
           <div className='flex flex-col'>

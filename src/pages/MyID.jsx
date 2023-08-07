@@ -6,6 +6,7 @@ import myqr from '../img/my-qrcode.svg'
 import silverCard from '../img/silvercard.svg'
 import coin from '../img/coin.svg'
 import coupon from '../img/coupon.svg'
+import TitleHeader from '../components/TitleHeader'
 
 const MyID = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
@@ -13,12 +14,7 @@ const MyID = () => {
 
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
-        <Link to="/my-account">
-          <ArrowLeft />
-        </Link>
-        ID ของฉัน
-      </header>
+      <TitleHeader title="ID ของฉัน" link="/my-account" />
       <main className='p-5'>
         <div className='inline-block w-full'>
           <button className='p-4 my-2 w-1/2 border-r border-r-[#F2F2F2]'>QR Code</button>

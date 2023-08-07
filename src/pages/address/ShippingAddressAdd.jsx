@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import chevronDropdown from '../../img/chevron-right.svg'
+import TitleHeader from '../../components/TitleHeader'
 
 const AddShippingAddress = () => {
   const [province, setProvince] = useState([]);
@@ -13,12 +14,7 @@ const AddShippingAddress = () => {
   const [openSuccess, setOpenSuccess] = useState(false)
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
-        <Link to="/shipping-address">
-          <ArrowLeft />
-        </Link>
-        ใส่ที่อยู่การจัดส่ง
-      </header>
+      <TitleHeader title="ใส่ที่อยู่การจัดส่ง" link="/shipping-address" />
       <main className='p-5 pb-[100px]'>
         <form action="#" className='flex flex-col gap-y-5'>
           <div className='flex flex-col'>

@@ -2,6 +2,7 @@ import { ArrowLeft, MarkerPin01, AlertTriangle, FileCheck02 } from '@untitled-ui
 import { Link } from 'react-router-dom'
 import { Fragment, useRef, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import TitleHeader from '../../components/TitleHeader'
 
 const ShippingAddress = () => {
   const [openDelete, setOpenDelete] = useState(false)
@@ -24,12 +25,7 @@ const ShippingAddress = () => {
 
   return (
     <>
-      <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold'>
-        <Link to="/my-account">
-          <ArrowLeft />
-        </Link>
-        ที่อยู่ของคุณ
-      </header>
+      <TitleHeader title="ที่อยู่ของคุณ" link="/my-account" />
 
       <main className='p-5 flex flex-col gap-y-[12px]'>
         <AddressInfo name="John Persson" address="999/99 อาคาร แบงเทรดดิ้ง ชั้นสอง บริษัท ซาเวียโก จำกัด เขตสวนหลวง..."/>
