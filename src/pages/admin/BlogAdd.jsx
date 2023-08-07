@@ -141,6 +141,11 @@ const BlogAdd = () => {
               <label htmlFor='content'>Content</label>
               <textarea className='py-2 mb-[11px] outline-none' name='content' id='content' placeholder="Your content..."></textarea>
             </div>
+
+            <div className='flex flex-col'>
+              <label htmlFor='date'>Date</label>
+              <input className='py-2 mb-[11px] outline-none' id='date' name='date' type='date' />
+            </div>
           </div>
         </form>
       </div>

@@ -132,16 +132,16 @@ const BlogEdit = () => {
 //     }
 //   }, [])
 
-  const save = () => {
-    editor
-      .save()
-      .then(outputData => {
-        console.log('Article data: ', outputData);
-      })
-      .catch(error => {
-        console.log('Saving failed: ', error);
-      });
-  };
+//   const save = () => {
+//     editor
+//       .save()
+//       .then(outputData => {
+//         console.log('Article data: ', outputData);
+//       })
+//       .catch(error => {
+//         console.log('Saving failed: ', error);
+//       });
+//   };
 
   return (
     <>

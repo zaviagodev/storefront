@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
 
     const login = async (usr, pwd) => {
         try {
-            return fetch("https://umer2002.aca.fc.zaviago.com/api/method/frappeauth_app.authentication.login", {
+            return fetch("https://dev.zaviago.com/api/method/frappeauth_app.authentication.login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

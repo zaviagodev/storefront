@@ -38,7 +38,7 @@ function App() {
   }, [navigate]);
 
   return (
-    <FrappeProvider url={"https://umer2002.aca.fc.zaviago.com"}
+    <FrappeProvider url={"https://dev.zaviago.com"}
       enableSocket={false}
       tokenParams={{
         type: "token",

@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { SfButton, SfDrawer, useTrapFocus, SfIconAdd, SfIconRemove } from '@storefront-ui/react'
 import { CSSTransition } from 'react-transition-group';
 import { useCart } from '../hooks/useCart'
 import { useProducts } from '../hooks/useProducts'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft } from '@untitled-ui/icons-react';
+import { ArrowLeft, ChevronRight, Ticket02 } from '@untitled-ui/icons-react';
 
 import { useRef } from 'react';
 
@@ -16,6 +16,23 @@ const Cart = () => {
     const navigate = useNavigate()
 
     useTrapFocus(drawerRef, { activeState: isOpen });
+
+    const [cartPage, setCartPage] = useState(true);
+    const [selectShippingOption, setSelectShippingOption] = useState(false)
+
+    const goToSelectShipping = () => {
+      setSelectShippingOption(true);
+      setCartPage(false)
+    }
+
+    const goBackToCartPage = () => {
+      setCartPage(true);
+      setSelectShippingOption(false)
+    }
+
+    const accessToCheckout = () => {
+      navigate("/checkout");
+    }
 
     return (
         <CSSTransition
@@ -38,15 +55,20 @@ const Cart = () => {
                 onClose={() => setIsOpen(false)}
                 className="bg-neutral-50 border border-gray-300 w-full z-[999]"
             >
-                <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
-                  <button onClick={() => setIsOpen(false)} type="button">
-                    <span className="sr-only">Close panel</span>
-                    <ArrowLeft />
-                  </button>
-                  ทั้งหมด ฿ {getTotal()}
-                </header>
-                <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                    <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+                {cartPage && (
+                  <>
+                    <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+                      <button onClick={() => setIsOpen(false)} type="button">
+                        <span className="sr-only">Close panel</span>
+                        <ArrowLeft />
+                      </button>
+                      ทั้งหมด ฿ {getTotal()}
+                    </header>
+                    <header className='bg-black text-white text-center py-[10px]'>
+                      กดรับของขวัญฟรี 🎁
+                    </header>
+                    <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                      <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                         {/* <div className="flex items-start justify-between">
                             <div className="ml-3 flex h-7 items-center">
                                 <button onClick={() => setIsOpen(false)} type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500">
@@ -128,22 +150,68 @@ const Cart = () => {
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                      </div>
 
-                    <div className="border-t border-gray-200 px-4 py-6 absolute bottom-0 w-full">
-                        <h2>รายละเอียดการชำระเงิน</h2>
-                        <div className="flex justify-between text-base font-medium text-gray-900">
+                      <div className="px-4 py-6 absolute bottom-0 w-full">
+                        <div className='border-y border-y-[#E3E3E3] mt-10 py-4'>
+                          <label htmlFor='coupon-pro'>โปรโมชั่นและส่วนลด</label>
+                          <div className='flex gap-x-5 mt-4'>
+                            <input type="text" id="coupon-pro" name="coupon-pro" placeholder="โปรดใส่โค้ดส่วนลด" className="border-b border-b-[#141414] w-full" />
+                            <button className='border-[2px] border-black p-2 rounded-md w-[68px] text-sm'>ใช้โค้ด</button>
+                          </div>
+                          <button className='flex gap-x-2 text-[#5B6CFF] mt-5 text-sm'>
+                            <Ticket02 />
+                            ใช้คูปองที่คุณเก็บไว้
+                          </button>
+                        </div>
+                        <div className='mt-4'>
+                          <h2>รายละเอียดการชำระเงิน</h2>
+                          <div className="flex justify-between text-base font-medium text-gray-900">
                             <p>ยอดรวม</p>
                             <p>฿ {getTotal()}</p>
-                        </div>
-                        <SfButton className="w-full mt-[22px]" style={{backgroundColor:cartCount == 0 ? "#C5C5C5" : "black",color:"white"}} disabled={cartCount == 0} onClick={() => { setIsOpen(false); navigate("/checkout"); }}>
+                          </div>
+                          <SfButton className="w-full mt-[22px]" style={{backgroundColor:cartCount == 0 ? "#C5C5C5" : "black",color:"white"}} disabled={cartCount == 0} onClick={goToSelectShipping}>
                             ดำเนินการสั่งซื้อสินค้า
-                        </SfButton>
+                          </SfButton>
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </>
+                )}
+
+                {selectShippingOption && (
+                  <>
+                    <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+                      <button onClick={goBackToCartPage} type="button">
+                        <span className="sr-only">Close panel</span>
+                        <ArrowLeft />
+                      </button>
+                      เลือกวิธีการรับสินค้า
+                    </header>
+                    <main>
+                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
+                        <div className='text-left'>
+                          <h2 className='text-[#333333] text-sm font-bold'>จัดส่งไปยังที่อยู่ของฉัน</h2>
+                          <p className='text-[#969696] text-xs'>รอรับสินค้าถึงหน้าบ้านรวดเร็วทันใจ</p>
+                        </div>
+                        <div>
+                          <ChevronRight />
+                        </div>
+                      </button>
+                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
+                        <div className='text-left'>
+                          <h2 className='text-[#333333] text-sm font-bold'>ไปรับที่หน้าร้าน หรือ ที่สาขา</h2>
+                          <p className='text-[#969696] text-xs'>รับสินค้าของคุณได้ฟรีที่จุดบริการ</p>
+                        </div>
+                        <div>
+                          <ChevronRight />
+                        </div>
+                      </button>
+                    </main>
+                  </>
+                )}
             </SfDrawer>
         </CSSTransition>
-
     );
 
     // return (

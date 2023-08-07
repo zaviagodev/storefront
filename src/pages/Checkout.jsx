@@ -7,7 +7,7 @@ import { useFrappeGetCall, useFrappePostCall } from 'frappe-react-sdk';
 import { useFormik } from 'formik';
 import { orderSchema } from '../components/forms/orderSchema';
 import { useNavigate } from 'react-router-dom';
-
+import { ArrowLeft } from '@untitled-ui/icons-react';
 
 const Checkout = () => {
     const { cart, cartCount, getTotal, resetCart } = useCart();
@@ -49,6 +49,17 @@ const Checkout = () => {
 
 
     return (
+      <>
+        <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+          <button onClick={() => navigate(-1)} type="button">
+            <span className="sr-only">Close panel</span>
+            <ArrowLeft />
+          </button>
+          ทั้งหมด ฿ {getTotal()}
+        </header>
+        <header className='bg-black text-white text-center py-[10px]'>
+          กดรับของขวัญฟรี 🎁
+        </header>
         <div className='flex flex-col md:flex-row gap-8 justify-center'>
             <form className="p-4 md:w-3/5 flex gap-4 flex-wrap text-neutral-900">
                 <AddressOptions
@@ -187,7 +198,7 @@ const Checkout = () => {
                 </div>
             </div>
         </div>
-
+        </>
     );
 
 }

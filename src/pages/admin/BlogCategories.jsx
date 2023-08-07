@@ -1,13 +1,14 @@
 import { useFrappeCreateDoc, useFrappeDeleteDoc, useFrappeGetDocList, useFrappeUpdateDoc, useFrappeDocTypeEventListener } from "frappe-react-sdk";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, Fragment } from "react";
 import { Link } from "react-router-dom";
 import SidebarAdmin from "../../components/SidebarAdmin";
 import {
   useToast,
 } from '@chakra-ui/react'
-import { SfModal, SfButton, SfIconClose, useDisclosure } from "@storefront-ui/react";
+import { SfButton, SfIconClose } from "@storefront-ui/react";
 import { useForm } from 'react-hook-form'
 import { CSSTransition } from 'react-transition-group'
+import { Dialog, Transition } from '@headlessui/react'
 
 const BlogCategories = () => {
   const { data, isLoading, error, mutate } = useFrappeGetDocList('Blog Category', {
@@ -24,9 +25,10 @@ const BlogCategories = () => {
   const { updateDoc, loading: loadingUpdate } = useFrappeUpdateDoc()
   const { deleteDoc, loading: loadingDelete } = useFrappeDeleteDoc()
 
-  const { isOpen: isOpenCreateCate, open: openCreateCate, close: closeCreateCate } = useDisclosure();
-  const { isOpen: isOpenUpdateCate, open: openUpdateCate, close: closeUpdateCate } = useDisclosure();
-  const { isOpen: isOpenDeleteCate, open: openDeleteCate, close: closeDeleteCate } = useDisclosure();
+  const [openCreateCate, setOpenCreateCate] = useState(false)
+  const [openUpdateCate, setOpenUpdateCate] = useState(false)
+  const [openDeleteCate, setOpenDeleteCate] = useState(false)
+
   const cancelRef = useRef()
 
   const createCate = (info) => {
@@ -53,22 +55,22 @@ const BlogCategories = () => {
 
   const clickToCloseUpdateCate = () => {
     setRowNum(null);
-    closeUpdateCate();
+    setOpenUpdateCate(false);
   }
 
   const clickToCloseDeleteCate = () => {
     setRowNum(null);
-    closeDeleteCate();
+    setOpenDeleteCate(false);
   }
 
   const clickToUpdateCate = (index) => {
     setRowNum(index);
-    openUpdateCate();
+    setOpenUpdateCate(true)
   }
 
   const clickToDeleteCate = (index) => {
     setRowNum(index);
-    openDeleteCate();
+    setOpenDeleteCate(true)
   }
 
   useFrappeDocTypeEventListener('Blog Category', (d) => {
@@ -81,7 +83,7 @@ const BlogCategories = () => {
   const updateCate = (info) => {
     updateDoc('Blog Category', data[rowNum].name, info)
     .then(() => {
-      closeUpdateCate();
+      setOpenUpdateCate(false);
       toast({
         title: 'Blog category updated',
         description: "The blog category has been updated.",
@@ -103,7 +105,7 @@ const BlogCategories = () => {
   const deleteCate = (info) => {
     deleteDoc('Blog Category', data[rowNum].name, info)
     .then(() => {
-      closeDeleteCate();
+      setOpenDeleteCate(false);
       setRowNum(null);
       toast({
         title: 'Blog category deleted',
@@ -137,7 +139,7 @@ const BlogCategories = () => {
           <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
             <button
               type="button"
-              onClick={openCreateCate}
+              onClick={() => setOpenCreateCate(true)}
               className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
             >
               Add
@@ -205,106 +207,158 @@ const BlogCategories = () => {
         </div>
       </div>
 
-      <CSSTransition
-        in={isOpenCreateCate}
-        timeout={200}
-        unmountOnExit
-        classNames={{
-          enter: 'opacity-0',
-          enterDone: 'opacity-100 transition duration-200 ease-out',
-          exitActive: 'opacity-0 transition duration-200 ease-out',
-        }}
-      >
-        <div className="fixed inset-0 bg-neutral-700 bg-opacity-50" />
-      </CSSTransition>
-      <SfModal open={isOpenCreateCate} onClose={closeCreateCate}>
-        <form onSubmit={handleSubmit(createCate)}>
-          <header className="flex justify-between">
-            Add category
-            <SfIconClose onClick={closeCreateCate}/>
-          </header>
-          <main className="flex flex-col">
-            <label htmlFor='title'>Category Name:</label>
-            <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 my-[11px]' type="text" {...register('title')}/>
-          </main>
+      <Transition.Root show={openCreateCate} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={() => setOpenCreateCate(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
 
-          <footer>
-            <SfButton variant='ghost' mr={3} onClick={closeCreateCate}>
-              Close
-            </SfButton>
-            <SfButton colorScheme='blue' type='submit' isLoading={loading}>Save</SfButton>
-          </footer>
-        </form>
-      </SfModal>
-      
-      <CSSTransition
-        in={isOpenUpdateCate}
-        timeout={200}
-        unmountOnExit
-        classNames={{
-          enter: 'opacity-0',
-          enterDone: 'opacity-100 transition duration-200 ease-out',
-          exitActive: 'opacity-0 transition duration-200 ease-out',
-        }}
-      >
-        <div className="fixed inset-0 bg-neutral-700 bg-opacity-50" />
-      </CSSTransition>
-      <SfModal open={isOpenUpdateCate} onClose={closeUpdateCate}>
-        <form onSubmit={handleSubmit(updateCate)}>
-          <header className="flex justify-between text-lg">
-            Update category: {data && rowNum !== null && data[rowNum].category}
-            <SfIconClose onClick={closeUpdateCate}/>
-          </header>
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full max-w-md">
+                <form onSubmit={handleSubmit(createCate)}>
+                  <header className="flex justify-between">
+                    Add category
+                    <SfIconClose onClick={() => setOpenCreateCate(false)}/>
+                  </header>
+                  <main className="flex flex-col">
+                    <label htmlFor='title'>Category Name:</label>
+                    <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 my-[11px]' type="text" {...register('title')}/>
+                  </main>
+
+                  <footer>
+                    <button variant='ghost' mr={3} onClick={() => setOpenCreateCate(false)}>
+                      Close
+                    </button>
+                    <button colorScheme='blue' type='submit' isLoading={loading}>Save</button>
+                  </footer>
+                </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
+      <Transition.Root show={openUpdateCate} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={() => setOpenUpdateCate(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full max-w-md">
+                  <form onSubmit={handleSubmit(updateCate)}>
+                    <header className="flex justify-between text-lg">
+                      Update category: {data && rowNum !== null && data[rowNum].category}
+                      <SfIconClose onClick={() => setOpenUpdateCate(false)}/>
+                    </header>
             
-            <main className="flex flex-col">
-              <label>Category Name:</label>
-              <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 my-[11px]' type="text" defaultValue={data && rowNum !== null && data[rowNum].category} {...register('title')}/>
-            </main>
+                    <main className="flex flex-col">
+                      <label>Category Name:</label>
+                      <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 my-[11px]' type="text" defaultValue={data && rowNum !== null && data[rowNum].category} {...register('title')}/>
+                    </main>
 
-            <footer>
-              <SfButton variant='ghost' mr={3} onClick={closeUpdateCate}>
-                Close
-              </SfButton>
-              <SfButton colorScheme='blue' type='submit' isLoading={loadingUpdate}>Save</SfButton>
-            </footer>
-        </form>
-      </SfModal>
+                    <footer>
+                      <button className='w-1/2 bg-white border border-[#111111] text-[#111111] rounded-[9px] p-3 text-center' onClick={() => setOpenUpdateCate(false)}>
+                        Close
+                      </button>
+                      <button className='w-1/2 bg-[#111111] border border-[#111111] text-white rounded-[9px] p-3 text-center'>Save</button>
+                    </footer>
+                  </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
 
-      <CSSTransition
-        in={isOpenDeleteCate}
-        timeout={200}
-        unmountOnExit
-        classNames={{
-          enter: 'opacity-0',
-          enterDone: 'opacity-100 transition duration-200 ease-out',
-          exitActive: 'opacity-0 transition duration-200 ease-out',
-        }}
-      >
-        <div className="fixed inset-0 bg-neutral-700 bg-opacity-50" />
-      </CSSTransition>
-      <SfModal
-        open={isOpenDeleteCate}
-        onClose={closeDeleteCate}
-      >
-        <form onSubmit={handleSubmit(deleteCate)}>
-          <header className="text-lg">
-            Delete Category: {data && rowNum !== null && data[rowNum].category}
-          </header>
+      <Transition.Root show={openDeleteCate} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={() => setOpenDeleteCate(false)}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
 
-          <main>
-            Are you sure? You can't undo this action afterwards.
-          </main>
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full max-w-md">
+                  <form onSubmit={handleSubmit(deleteCate)}>
+                    <header className="text-lg">
+                      Delete Category: {data && rowNum !== null && data[rowNum].category}
+                    </header>
 
-          <footer>
-            <SfButton ref={cancelRef} onClick={closeDeleteCate}>
-              Cancel
-            </SfButton>
-            <SfButton colorScheme='red' type='submit' isLoading={loadingDelete} ml={3}>
-              Delete
-            </SfButton>
-          </footer>
-        </form>
-      </SfModal>
+                    <main>
+                      Are you sure? You can't undo this action afterwards.
+                    </main>
+
+                    <footer>
+                      <button ref={cancelRef} onClick={() => setOpenDeleteCate(false)}>
+                        Cancel
+                      </button>
+                      <button colorScheme='red' type='submit' isLoading={loadingDelete} ml={3}>
+                        Delete
+                      </button>
+                    </footer>
+                  </form>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
+
     </>
   )
 }
