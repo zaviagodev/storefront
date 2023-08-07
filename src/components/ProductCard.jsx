@@ -13,7 +13,7 @@ const ProductCard = ({
 }) => {
     const { addToCart } = useCart()
     return (
-        <Link to={`/products/${productId}`} onClick={() => window.scrollY(0)}>
+        <Link to={`/products/${productId}`}>
             <div className="rounded-md hover:shadow-lg min-w-[150px] max-w-[150px]">
                 <div className="relative">
                     <SfLink href="#" className="block">

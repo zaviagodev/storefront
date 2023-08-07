@@ -1,6 +1,6 @@
 import { useCounter } from 'react-use';
 import { clamp } from '@storefront-ui/shared';
-import { React, useState, useContext } from 'react';
+import { React, useState, useContext, useEffect } from 'react';
 import {
     SfButton,
     SfLink,
@@ -140,6 +140,10 @@ const Product = () => {
       }
     ]
 
+    useEffect(() => {
+      window.scrollTo(0,0)
+    }, [])
+
     return (
       <>
         <header className='p-[8px] bg-black w-full text-center text-white'>
@@ -275,6 +279,7 @@ const Product = () => {
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
                   {(products ?? []).map((product) => (
                     <ProductCard
+                      onClick={() => window.scrollY(0)}
                       key={product.item_code}
                       title={product.name}
                       productId={product.name}
