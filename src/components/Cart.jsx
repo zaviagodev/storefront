@@ -31,7 +31,7 @@ const Cart = () => {
     }
 
     const accessToCheckout = () => {
-      navigate("/checkout");
+      location.href = "/checkout"
     }
 
     return (
@@ -189,7 +189,7 @@ const Cart = () => {
                       เลือกวิธีการรับสินค้า
                     </header>
                     <main>
-                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
+                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={accessToCheckout}>
                         <div className='text-left'>
                           <h2 className='text-[#333333] text-sm font-bold'>จัดส่งไปยังที่อยู่ของฉัน</h2>
                           <p className='text-[#969696] text-xs'>รอรับสินค้าถึงหน้าบ้านรวดเร็วทันใจ</p>
@@ -198,7 +198,7 @@ const Cart = () => {
                           <ChevronRight />
                         </div>
                       </button>
-                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
+                      <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={accessToCheckout}>
                         <div className='text-left'>
                           <h2 className='text-[#333333] text-sm font-bold'>ไปรับที่หน้าร้าน หรือ ที่สาขา</h2>
                           <p className='text-[#969696] text-xs'>รับสินค้าของคุณได้ฟรีที่จุดบริการ</p>

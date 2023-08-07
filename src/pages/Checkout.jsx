@@ -7,13 +7,31 @@ import { useFrappeGetCall, useFrappePostCall } from 'frappe-react-sdk';
 import { useFormik } from 'formik';
 import { orderSchema } from '../components/forms/orderSchema';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from '@untitled-ui/icons-react';
+import { ArrowLeft, MarkerPin01, ChevronRight } from '@untitled-ui/icons-react';
+import chevronDropdown from '../img/chevron-right.svg'
+import { useProducts } from '../hooks/useProducts'
+import { ShoppingBag01 } from '@untitled-ui/icons-react';
+import banks from '../img/banks.svg'
+import visaIcon from '../img/visa-icon.svg'
 
 const Checkout = () => {
     const { cart, cartCount, getTotal, resetCart } = useCart();
     const navigate = useNavigate();
 
+    const { getByItemCode } = useProducts()
+
+    const [modified, setModified] = useState(false)
+
     const { call, isCompleted, result } = useFrappePostCall('headless_e_commerce.api.place_order');
+
+    const [checkoutPage, setCheckoutPage] = useState(true)
+    const [selectShippingAddress, setSelectShippingAddress] = useState(false)
+    const [selectPayment, setSelectPayment] = useState(false)
+
+    const [delivery, setDelivery] = useState(59)
+    const [discount, setDiscount] = useState(99)
+
+    const total = getTotal() + delivery - discount
 
     const formik = useFormik({
         initialValues: {
@@ -47,9 +65,26 @@ const Checkout = () => {
     const [positiveAlert, setPositiveAlert] = useState(false);
     const [errorAlert, setErrorAlert] = useState(false);
 
+    const switchToShippingAddress = () => {
+      setCheckoutPage(false);
+      setSelectShippingAddress(true)
+    }
+
+    const goBackToCheckoutPage = () => {
+      setCheckoutPage(true);
+      setSelectShippingAddress(false);
+      setSelectPayment(false)
+    }
+
+    const switchToSelectPayment = () => {
+      setCheckoutPage(false);
+      setSelectPayment(true);
+    }
 
     return (
-      <>
+    <>
+      {checkoutPage && (
+        <>
         <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
           <button onClick={() => navigate(-1)} type="button">
             <span className="sr-only">Close panel</span>
@@ -60,14 +95,23 @@ const Checkout = () => {
         <header className='bg-black text-white text-center py-[10px]'>
           กดรับของขวัญฟรี 🎁
         </header>
-        <div className='flex flex-col md:flex-row gap-8 justify-center'>
-            <form className="p-4 md:w-3/5 flex gap-4 flex-wrap text-neutral-900">
+        <div className='flex flex-col md:flex-row justify-center'>
+            <form action="#" className="p-4 md:w-3/5 flex gap-4 flex-wrap text-neutral-900">
+              <button className='flex justify-between items-center py-2 w-full' onClick={(e) => {e.preventDefault();switchToShippingAddress();}}>
+                <div className='flex gap-x-[10px]'>
+                  <MarkerPin01 />
+                  ที่อยู่ในการจัดส่ง
+                </div>
+                <div>
+                  <ChevronRight />
+                </div>
+              </button>
                 <AddressOptions
                     onChange={value => formik.setFieldValue('billing_address', value)}
                     value={formik.values.billing_address}
                     error={formik.errors.billing_address}
                 />
-                <label className="w-full flex items-center gap-2">
+                {/* <label className="w-full flex items-center gap-2">
                     <SfCheckbox
                         name="use_different_shipping"
                         onChange={formik.handleChange}
@@ -82,26 +126,56 @@ const Checkout = () => {
                             error={formik.errors.shipping_address}
                         />
                     )
-                }
+                } */}
                 <PaymentMethods onChange={value => formik.setFieldValue('payment_method', value)} value={formik.values.payment_method} error={formik.errors.payment_method} />
             </form>
             <div className='p-4 md:w-2/5'>
-                <div className="md:shadow-lg md:rounded-md md:border md:border-neutral-100">
-                    <div className="flex justify-between items-end bg-neutral-100 md:bg-transparent py-2 px-4 md:px-6 md:pt-6 md:pb-4">
-                        <p className="typography-headline-4 font-bold md:typography-headline-3">Order Summary</p>
-                        <p className="typography-text-base font-medium">(Items: {cartCount})</p>
-                    </div>
-                    <div className="px-4 pb-4 mt-3 md:px-6 md:pb-6 md:mt-0">
+              <div className="flex justify-between items-end py-4">
+                <p className="typography-headline-4 font-bold md:typography-headline-3 gap-x-2 flex">
+                  <ShoppingBag01 />
+                  Order Summary
+                </p>
+                <p className="typography-text-base font-medium">(Items: {cartCount})</p>
+              </div>
+              <div className="md:shadow-lg md:rounded-md md:border md:border-neutral-100">
+                <ul role="list" className="divide-y divide-gray-200">
+                  {
+                    Object.entries(cart).map(([itemCode, qty]) => {
+                      const product = getByItemCode(itemCode)
+                      return (
+                        <li key={itemCode} className="flex pb-6">
+                          <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                            <img src={product?.website_image} alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." className="h-full w-full object-cover object-center" />
+                          </div>
+
+                          <div className="ml-4 flex flex-1 flex-col">
+                            <div>
+                              <div className="flex justify-between text-base font-medium text-gray-900">
+                                <h3>
+                                  <a href="#">{product?.name}</a>
+                                </h3>
+                                <p className="ml-4">{product?.formatted_price}</p>
+                              </div>
+                              <p className="mt-1 text-sm text-gray-500">Salmon</p>
+                            </div>
+                          </div>
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+                    <div className="py-4 mt-3 md:pb-6 md:mt-0 border-t border-neutral-200">
+                        <h2 className='text-black font-bold text-[15px] mb-[18px]'>รายละเอียดการชำระเงิน</h2>
                         <div className="flex justify-between typography-text-base pb-4">
-                            <div className="flex flex-col grow pr-2">
-                                <p>Items Subtotal</p>
-                                <p className="my-2">Delivery</p>
-                                <p>Estimated Sales Tax</p>
+                            <div className="flex flex-col grow pr-2 gap-y-5 text-sm">
+                              <p>ยอดรวม</p>
+                              <p>โค้ดส่วนลด</p>
+                              <p>ค่าจัดส่ง</p>
                             </div>
                             <div className="flex flex-col text-right">
-                                <p>฿ {getTotal()}</p>
-                                <p className="my-2">฿ 0</p>
-                                <p>฿ 0</p>
+                              <p>฿ {getTotal()}</p>
+                              <p>-฿ {discount}</p>
+                              <p className="my-2">฿ {delivery}</p>
                             </div>
                         </div>
                         {/* {promoCode ? (
@@ -128,17 +202,17 @@ const Checkout = () => {
                         {/* <p className="px-3 py-1.5 bg-secondary-100 text-secondary-700 typography-text-sm rounded-md text-center mb-4">
                             You are saving ${Math.abs(orderDetails.savings).toFixed(2)} on your order today!
                         </p> */}
-                        <div className="flex justify-between typography-headline-4 md:typography-headline-3 font-bold pb-4 mb-4 border-b border-neutral-200">
-                            <p>Total</p>
-                            <p>฿ {getTotal()}</p>
+                        <div className="flex justify-between typography-headline-4 md:typography-headline-3 font-bold pb-4 mb-4 text-[#010101]">
+                          <p>ทั้งหมด</p>
+                          <p>฿ {total}</p>
                         </div>
-                        <SfButton size="lg" className="w-full" onClick={formik.handleSubmit}>
-                            Place Order
+                        <div className="flex justify-between typography-headline-4 md:typography-headline-3 font-bold pb-4 mb-4 text-[#010101]">
+                          <p>Points ที่คุณจะได้รับ</p>
+                          <p>Points 149</p>
+                        </div>
+                        <SfButton size="lg" className="w-full" style={{backgroundColor:"black"}} onClick={(e) => {e.preventDefault();switchToSelectPayment()}}>
+                            ชำระเงิน
                         </SfButton>
-                        <div className="typography-text-sm mt-4 text-center">
-                            By placing my order, you agree to our <SfLink href="#">Terms and Conditions</SfLink> and our{' '}
-                            <SfLink href="#">Privacy Policy.</SfLink>
-                        </div>
                     </div>
                 </div>
                 <div className="absolute top-0 right-0 mx-2 mt-2 sm:mr-6">
@@ -199,6 +273,109 @@ const Checkout = () => {
             </div>
         </div>
         </>
+      )}
+
+        {selectShippingAddress && (
+          <>
+            <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+              <button onClick={goBackToCheckoutPage} type="button">
+              <span className="sr-only">Close panel</span>
+                <ArrowLeft />
+              </button>
+              ใส่ที่อยู่ในการจัดส่ง
+            </header>
+            <main className='p-5 pb-[100px]'>
+              <form action="#" className='flex flex-col gap-y-5'>
+                <div className='flex flex-col'>
+                  <label htmlFor='receiver-name'>ชื่อผู้รับ</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='receiver-name' name='receiver-name' type='text' />
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='surname'>นามสกุล</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='surname' name='surname' type='text'/>
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='address'>ที่อยู่ (ห้องเลขที่, ตึก, ถนน)</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='address' name='address' type='text'/>
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='province'>จังหวัด</label>
+                  <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='province' name='province' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
+                    <option value='กรุงเทพมหานคร'>กรุงเทพมหานคร</option>
+                    <option value='สมุทรปราการ'>สมุทรปราการ</option>
+                    <option value='สมุทรสาคร'>สมุทรสาคร</option>
+                    <option value='ปทุมธานี'>ปทุมธานี</option>
+                  </select>
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='district'>เมือง / เขต</label>
+                  <select className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 pl-3 pr-10 mt-[11px] appearance-none' id='district' name='district' style={{backgroundImage:"url(" + chevronDropdown + ")",backgroundPosition:"right 0.5rem center",backgroundRepeat:"no-repeat"}}>
+                    <option value='สวนหลวง'>สวนหลวง</option>
+                    <option value='บางกะปิ'>บางกะปิ</option>
+                    <option value='บางนา'>บางนา</option>
+                    <option value='ห้วยขวาง'>ห้วยขวาง</option>
+                  </select>
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='postal-code'>รหัสไปรษณีย์</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='postal-code' name='postal-code' type='text'/>
+                </div>
+
+                <div className='flex flex-col'>
+                  <label htmlFor='phone'>เบอร์โทรศัพท์</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='phone' name='phone' type='tel'/>
+                  <p className="text-xs text-[#474747] mt-[11px]">ที่ให้ต้องการให้ค้นส่งติดต่อแจ้งเมื่อมีการจัดส่ง</p>
+                </div>
+              </form>
+            </main>
+            <footer className="p-5 fixed bottom-0 w-full">
+              <button onClick={() => setOpenSuccess(true)} className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full ${!modified ? "bg-[#C5C5C5] border border-[#C5C5C5]" : "bg-[#111111] border border-[#111111]"}`} disabled={!modified}>บันทึกที่อยู่</button>
+            </footer>
+          </>
+      )}
+
+      {selectPayment && (
+        <>
+          <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+            <button onClick={goBackToCheckoutPage} type="button">
+              <span className="sr-only">Close panel</span>
+              <ArrowLeft />
+            </button>
+            เลือกช่องทางชำระ
+          </header>
+          <main>
+            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={formik.handleSubmit}>
+              <div className='text-left'>
+                <h2 className='text-[#333333] text-sm font-bold'>โอนเงินเข้าบัญชี</h2>
+                <p className='text-[#969696] text-xs mt-[6px]'>
+                  <img src={banks} />
+                </p>
+              </div>
+              <div>
+                <ChevronRight />
+              </div>
+            </button>
+            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={formik.handleSubmit}>
+              <div className='text-left'>
+                <h2 className='text-[#333333] text-sm font-bold'>Credit Card</h2>
+                <p className='text-[#969696] text-xs flex items-center gap-x-3'>
+                  <img src={visaIcon} />
+                  5689 .... 1234
+                </p>
+              </div>
+              <div>
+                <ChevronRight />
+              </div>
+            </button>
+          </main>
+        </>
+      )}
+      </>
     );
 
 }
