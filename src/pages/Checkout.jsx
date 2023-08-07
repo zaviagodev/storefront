@@ -349,7 +349,7 @@ const Checkout = () => {
             เลือกช่องทางชำระ
           </header>
           <main>
-            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={formik.handleSubmit}>
+            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' type="button" onClick={formik.handleSubmit}>
               <div className='text-left'>
                 <h2 className='text-[#333333] text-sm font-bold'>โอนเงินเข้าบัญชี</h2>
                 <p className='text-[#969696] text-xs mt-[6px]'>
@@ -360,7 +360,7 @@ const Checkout = () => {
                 <ChevronRight />
               </div>
             </button>
-            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' onClick={formik.handleSubmit}>
+            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' type="button" onClick={formik.handleSubmit}>
               <div className='text-left'>
                 <h2 className='text-[#333333] text-sm font-bold'>Credit Card</h2>
                 <p className='text-[#969696] text-xs flex items-center gap-x-3'>

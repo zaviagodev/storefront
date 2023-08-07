@@ -279,7 +279,6 @@ const Product = () => {
                 <div className="flex overflow-x-auto gap-x-[14px] mx-auto px-5">
                   {(products ?? []).map((product) => (
                     <ProductCard
-                      onClick={() => window.scrollY(0)}
                       key={product.item_code}
                       title={product.name}
                       productId={product.name}
