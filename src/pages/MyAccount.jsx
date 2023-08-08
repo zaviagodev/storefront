@@ -3,8 +3,9 @@ import avatarImg from '../img/avatar.svg'
 import silverCard from '../img/silvercard.svg'
 import qrcode from '../img/qrcode.svg'
 import recentViews from '../img/clock-rewind.svg'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Fragment } from 'react'
 import NavHeader from '../components/NavHeader'
+import { Dialog, Transition } from '@headlessui/react'
 import { 
     Heart,
     File06,
@@ -22,7 +23,8 @@ import {
     AnnotationDots,
     ImageIndentLeft,
     FileShield02,
-    LogOut02
+    LogOut02,
+    AlertTriangle
 } from '@untitled-ui/icons-react'
 import { useFrappeAuth, useFrappeGetDoc } from 'frappe-react-sdk';
 import FooterMenu from '../components/FooterMenu'
@@ -30,6 +32,8 @@ import FooterMenu from '../components/FooterMenu'
 const MyAccount = () => {
   const [bronzeLevel, setBronzeLevel] = useState(false);
   const [silverLevel, setSilverLevel] = useState(true);
+
+  const [openLogout, setOpenLogout] = useState(false);
 
   const { currentUser, updateCurrentUser } = useFrappeAuth();
 
@@ -256,12 +260,82 @@ const MyAccount = () => {
 
         <h2 className='mt-[30px] mb-[10px]'>บัญชี</h2>
         <div className='flex flex-col bg-white rounded-[6px] items-center gap-y-[10px]' style={{filter:"drop-shadow(0 4px 20px #6363630D"}}>
-          {accountMenu.map((menu) => 
-            <AccountMenu icon={menu.icon} title={menu.title} link={menu.link} />
-          )}
+          <button className='flex justify-between items-center px-5 py-[17px] w-full' onClick={() => setOpenLogout(true)}>
+            <div className='flex gap-x-[10px]'>
+              <LogOut02 />
+              ออกจากระบบ
+            </div>
+            <div>
+              <ChevronRight />
+            </div>
+          </button>
         </div>
       </main>
       <FooterMenu active={3} />
+
+      <Transition.Root show={openLogout} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={setOpenLogout}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 z-10 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                enterTo="opacity-100 translate-y-0 sm:scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              >
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all w-full max-w-md">
+                  <div>
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#EC5454]">
+                      <AlertTriangle color="white"/>
+                    </div>
+                    <div className="mt-3 text-center sm:mt-5">
+                      <Dialog.Title as="h3" className="text-lg font-bold leading-6 text-[#333333]">
+                        คุณต้องการ<br/> 'ออกจากระบบ' ใช่หรือไม่
+                      </Dialog.Title>
+                      <div className="mt-2">
+                        <p className="text-xs text-[#8A8A8A]">
+                          กดยืนยันเพื่อทำการออกจากระบบ<br/> โดยคุณสามารถเข้าสู่ระบบอีกครั้ง<br/> ได้ด้วย Line ของคุณ
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-flow-row-dense grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      className='w-full bg-white border border-[#111111] text-[#111111] rounded-[9px] p-3 text-center'
+                      onClick={() => setOpenLogout(false)}
+                    >
+                      ยกเลิก
+                    </button>
+                    <button
+                      type="button"
+                      className='w-full bg-[#111111] border border-[#111111] text-white rounded-[9px] p-3 text-center'
+                      onClick={() => location.href = "/welcome"}
+                    >
+                      ออกจากระบบ
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition.Root>
     </div>
   )
 }

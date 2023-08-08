@@ -27,6 +27,7 @@ const Checkout = () => {
     const [checkoutPage, setCheckoutPage] = useState(true)
     const [selectShippingAddress, setSelectShippingAddress] = useState(false)
     const [selectPayment, setSelectPayment] = useState(false)
+    const [addCard, setAddCard] = useState(false);
 
     const [delivery, setDelivery] = useState(59)
     const [discount, setDiscount] = useState(99)
@@ -81,12 +82,22 @@ const Checkout = () => {
       setSelectPayment(true);
     }
 
+    const clickToAddCard = () => {
+      setSelectPayment(false);
+      setAddCard(true)
+    }
+
+    const clickToSelectPayment = () => {
+      setAddCard(false);
+      setSelectPayment(true);
+    }
+
     return (
     <>
       {checkoutPage && (
         <>
         <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
-          <button onClick={() => navigate(-1)} type="button">
+          <button onClick={() => location.href = "/"} type="button">
             <span className="sr-only">Close panel</span>
             <ArrowLeft />
           </button>
@@ -349,7 +360,7 @@ const Checkout = () => {
             เลือกช่องทางชำระ
           </header>
           <main>
-            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' type="button" onClick={formik.handleSubmit}>
+            <label htmlFor="transfer" className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
               <div className='text-left'>
                 <h2 className='text-[#333333] text-sm font-bold'>โอนเงินเข้าบัญชี</h2>
                 <p className='text-[#969696] text-xs mt-[6px]'>
@@ -357,10 +368,11 @@ const Checkout = () => {
                 </p>
               </div>
               <div>
-                <ChevronRight />
+                <input type="radio" id="transfer" name="payment-method" className='payment-check' checked/>
+                <span className='payment-radios'></span>
               </div>
-            </button>
-            <button className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center' type="button" onClick={formik.handleSubmit}>
+            </label>
+            <label htmlFor="credit" className='flex justify-between p-5 w-full border-b border-b-[#E3E3E3] items-center'>
               <div className='text-left'>
                 <h2 className='text-[#333333] text-sm font-bold'>Credit Card</h2>
                 <p className='text-[#969696] text-xs flex items-center gap-x-3'>
@@ -369,10 +381,62 @@ const Checkout = () => {
                 </p>
               </div>
               <div>
-                <ChevronRight />
+                <input type="radio" id="credit" name="payment-method" className='payment-check'/>
+                <span className='payment-radios'></span>
               </div>
-            </button>
+            </label>
+
+            <div className='p-5'>
+              <button className='bg-[#F4F4F4] p-5 rounded-[7px] w-full' onClick={clickToAddCard}>
+                <div className='flex gap-x-[7px] justify-center'>
+                  <MarkerPin01 />
+                  เพิ่มบัตรเครดิตการ์ด
+                </div>
+              </button>
+            </div>
           </main>
+          <footer className='p-5 absolute bottom-0 w-full'>
+            <button onClick={formik.handleSubmit} type='button' className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full bg-[#111111] border border-[#111111]`}>ยืนยันการเลือก</button>
+          </footer>
+        </>
+      )}
+
+      {addCard && (
+        <>
+          <header className='p-[14px] border-b border-b-[#F2F2F2] flex gap-x-[7px] text-md font-bold bg-white'>
+            <button onClick={clickToSelectPayment} type="button">
+              <span className="sr-only">Close panel</span>
+              <ArrowLeft />
+            </button>
+            เพิ่มบัตรเครดิตการ์ด
+          </header>
+          <main className='p-5'>
+            <form action="#" className='flex flex-col gap-y-5'>
+              <div className='flex flex-col'>
+                <label htmlFor='card-number'>หมายเลขบัตร</label>
+                <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='card-number' name='card-number' type='text' placeholder='0-000-000-00-0-0'/>
+              </div>
+
+              <div className='flex flex-col'>
+                <label htmlFor='card-name'>ชื่อที่แสดงบนบัตร</label>
+                <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='card-name' name='card-name' type='text'/>
+              </div>
+
+              <div className='flex gap-x-[11px]' style={{width:"calc(100% - 11px)"}}>
+                <div className='flex flex-col w-1/2'>
+                  <label htmlFor='expiry-date'>วันหมดอายุ</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='expiry-date' name='expiry-date' type='text' placeholder='12/25'/>
+                </div>
+                <div className='flex flex-col w-1/2'>
+                  <label htmlFor='cvv'>CVV</label>
+                  <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='cvv' name='cvv' type='text'/>
+                </div>
+              </div>
+            </form>
+          </main>
+          <footer className='p-5 absolute bottom-0 w-full'>
+            <button onClick={clickToSelectPayment} type='button' className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full bg-[#111111] border border-[#111111]`}>บันทึกข้อมูลบัตร</button>
+          </footer>
         </>
       )}
       </>

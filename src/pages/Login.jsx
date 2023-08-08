@@ -23,6 +23,8 @@ export default function Login() {
         initialValues: {
             usr: 'umer2001.uf@gmail.com',
             pwd: 'admintoor',
+            // usr: 'suttirak.ch@zaviago.com',
+            // pwd: 'Markchar123%',
         },
         onSubmit: values => login(values.usr, values.pwd).then(() => navigate("/"))
     });
