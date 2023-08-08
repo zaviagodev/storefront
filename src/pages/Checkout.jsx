@@ -133,7 +133,10 @@ const Checkout = () => {
                 </div>
               </button>
                 <AddressOptions
-                    onChange={value => formik.setFieldValue('billing_address', value)}
+                    onChange={(value) => {
+                      formik.setFieldValue('billing_address', value);
+                    }}
+                    onClick={(e) => e.preventDefault()}
                     value={formik.values.billing_address}
                     error={formik.errors.billing_address}
                 />
@@ -411,7 +414,7 @@ const Checkout = () => {
             </div>
           </main>
           <footer className='p-5 absolute bottom-0 w-full'>
-            <button onClick={formik.handleSubmit} type='button' className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full bg-[#111111] border border-[#111111]`}>ยืนยันการเลือก</button>
+            <button onClick={formik.handleSubmit} type='submit' className={`block mt-[14px] w-1/2 text-white rounded-[9px] p-3 text-center w-full bg-[#111111] border border-[#111111]`}>ยืนยันการเลือก</button>
           </footer>
         </>
       )}
@@ -478,7 +481,10 @@ function AddressOptions({
         <>
             <div className="flex flex-wrap gap-4 lg:gap-6">
                 {data?.message?.map(({ name: nameVal, address_title, address_line2 = null, city, state, country }) => (
-                    <label key={nameVal} className="relative xs:w-full md:w-auto" onClick={() => onChange(nameVal)}>
+                    <label key={nameVal} className="relative xs:w-full md:w-auto" onClick={(e) => {
+                      e.preventDefault();
+                      onChange(nameVal)
+                    }}>
                         <div className={`cursor-pointer rounded-md -outline-offset-2 hover:border-primary-200 hover:bg-primary-100 peer-focus:border-primary-200 peer-focus:bg-primary-100 ${value == nameVal ? "border-primary-300 bg-primary-100 outline outline-2 outline-primary-700" : ""}`}>
                             <AddressCard title={address_title} addressLine2={address_line2} city={city} state={state === "Select One" ? null : state} country={country} />
                         </div>
