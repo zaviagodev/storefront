@@ -7,7 +7,7 @@ import { useFrappeGetCall, useFrappePostCall } from 'frappe-react-sdk';
 import { useFormik } from 'formik';
 import { orderSchema } from '../components/forms/orderSchema';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, MarkerPin01, ChevronRight } from '@untitled-ui/icons-react';
+import { ArrowLeft, MarkerPin01, ChevronRight, HelpCircle } from '@untitled-ui/icons-react';
 import chevronDropdown from '../img/chevron-right.svg'
 import { useProducts } from '../hooks/useProducts'
 import { ShoppingBag01 } from '@untitled-ui/icons-react';
@@ -61,6 +61,21 @@ const Checkout = () => {
         }
     }, [isCompleted])
 
+    const tooltipHide = {
+      visibility:"hidden",
+      opacity:"0",
+      transform:"translateY(11px)",
+      transition:"all 300ms"
+    }
+
+    const tooltipShow = {
+      visibility:"visible",
+      opacity:"1",
+      transform:"translateY(8px)",
+      transition:"all 300ms"
+    }
+
+    const [showTooltipCVV, setShowTooltipCVV] = useState(tooltipHide);
 
     const [informationAlert, setInformationAlert] = useState(false);
     const [positiveAlert, setPositiveAlert] = useState(false);
@@ -430,6 +445,12 @@ const Checkout = () => {
                 <div className='flex flex-col w-1/2'>
                   <label htmlFor='cvv'>CVV</label>
                   <input className='border border-[#E3E3E3] rounded-[8px] outline-none py-2 px-3 mt-[11px]' id='cvv' name='cvv' type='text'/>
+                  <div className='absolute right-[27px] translate-y-[44px]' onMouseEnter={() => setShowTooltipCVV(tooltipShow)} onMouseLeave={() => setShowTooltipCVV(tooltipHide)}>
+                    <HelpCircle color="#333333"/>
+                  </div>
+                  <div className='absolute bg-[#8A8A8A] px-3 py-2 rounded-[12px] text-white right-[18px]' style={showTooltipCVV}>
+                    <p className='text-xs'>เลข 3 ตัว หลังบัตรของคุณ</p>
+                  </div>
                 </div>
               </div>
             </form>

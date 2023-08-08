@@ -149,7 +149,7 @@ const MyAccount = () => {
             <img src={data.user_image} width="64" className='rounded-[99px]'/>
             <div className='ml-3 flex flex-col'>
               <span className='font-bold'>{data.full_name}</span>
-              <Link className='flex items-center gap-x-1'>
+              <Link className='flex items-center gap-x-1' to='/edit-profile'>
                 แก้ไขโปรไฟล์ของฉัน
                 <ChevronRight color="#333333" />
               </Link>
