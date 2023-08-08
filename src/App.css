@@ -66,6 +66,27 @@
   margin-left:280px;
 }
 
+.payment-check {
+  opacity:0;
+}
+
+.payment-check:checked ~ .payment-radios {
+  background-color:#00B14F;
+  border-color:#00B14F;
+  background-image:url('img/checked-box.svg');
+  background-position:center;
+  background-repeat:no-repeat
+}
+
+.payment-radios {
+  border:3px solid #C1C1C1;
+  background-color:white;
+  width:23px;
+  height:23px;
+  display:inline-block;
+  border-radius:99px;
+}
+
 @keyframes borderAnim {
   from {
     width:0;

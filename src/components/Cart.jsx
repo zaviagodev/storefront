@@ -156,7 +156,7 @@ const Cart = () => {
                         <div className='border-y border-y-[#E3E3E3] mt-10 py-4'>
                           <label htmlFor='coupon-pro'>โปรโมชั่นและส่วนลด</label>
                           <div className='flex gap-x-5 mt-4'>
-                            <input type="text" id="coupon-pro" name="coupon-pro" placeholder="โปรดใส่โค้ดส่วนลด" className="border-b border-b-[#141414] w-full" />
+                            <input type="text" id="coupon-pro" name="coupon-pro" placeholder="โปรดใส่โค้ดส่วนลด" className="border-b border-b-[#141414] w-full outline-none" autoComplete="off" onClick={(e) => e.target.focus()}/>
                             <button className='border-[2px] border-black p-2 rounded-md w-[68px] text-sm'>ใช้โค้ด</button>
                           </div>
                           <button className='flex gap-x-2 text-[#5B6CFF] mt-5 text-sm'>
