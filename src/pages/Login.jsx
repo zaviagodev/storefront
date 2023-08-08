@@ -28,8 +28,6 @@ export default function Login() {
         },
         onSubmit: values => login(values.usr, values.pwd).then(() => navigate("/"))
     });
-
-
     return (
         <form className="p-4 flex gap-4 flex-wrap text-neutral-900 text-start" onSubmit={formik.handleSubmit}>
             <h2 className="w-full typography-headline-4 md:typography-headline-3 font-bold">Sign in</h2>
